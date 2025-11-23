@@ -312,5 +312,17 @@ document.querySelectorAll('.compare img').forEach(img=>{
   img.addEventListener('error', ()=>console.error('Image failed to load:', img.getAttribute('src')));
 });
 </script>
+  <script>
+  document.querySelectorAll('.compare').forEach(block => {
+    const slider = block.querySelector('.slider');
+    const right  = block.querySelector('.img-right');
+    const setClip = v => right && (right.style.clipPath = `polygon(${v}% 0, 100% 0, 100% 100%, ${v}% 100%)`);
+    if (slider && right){
+      setClip(slider.value || 50);
+      slider.addEventListener('input', e => setClip(e.target.value));
+      slider.addEventListener('change', e => setClip(e.target.value));
+    }
+  });
+</script>
 </body>
 </html>
