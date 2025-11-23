@@ -209,3 +209,26 @@ img{ max-width:100%; height:auto; display:block; }
   width: 2px; height: 100%; background: #000; border: none;
   box-shadow: 0 0 0 9999px transparent;
 }
+
+.compare{ position:relative; width:100%; height:520px; border-radius:12px; overflow:hidden;
+          background:#ddd; box-shadow:0 8px 30px rgba(0,0,0,.08); }
+@media (max-width:768px){ .compare{ height:60vw; max-height:420px; } }
+
+.compare .img,
+.compare .reveal>img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; object-position:center; background:#f6f6f6;
+}
+.compare .img-left{ z-index:1; }
+.compare .reveal{ position:absolute; inset:0; width:50%; overflow:hidden; z-index:2; }
+
+.compare img{ -webkit-user-drag:none; user-select:none; -webkit-user-select:none; pointer-events:none; }
+.compare .slider{ -webkit-appearance:none; appearance:none; position:absolute; inset:0; width:100%;
+                  background:transparent; z-index:5; cursor:ew-resize; touch-action:none; }
+.compare .slider::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:2px; height:100%; background:#000; border:none; }
+
+/* 如果某张图失败，在右上角给个提示（调试用，可删） */
+.compare.compare--error::after{
+  content:'image missing'; position:absolute; top:8px; right:8px; z-index:10;
+  background:#000a; color:#fff; font-size:12px; padding:4px 6px; border-radius:6px;
+}
