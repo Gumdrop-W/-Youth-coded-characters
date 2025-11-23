@@ -1,44 +1,65 @@
-// script.js  (版本号记得在 HTML 里改成 ?v=16 以强制刷新缓存)
+<script>
 (function(){
-  function initComparisons(root = document){
-    root.querySelectorAll('.compare').forEach(c => {
-      const right = c.querySelector('.img-right');
+  function pctFromEvent(e, el){
+    const r = el.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+    const clamped = Math.max(0, Math.min(r.width, x));
+    return Math.round((clamped / r.width) * 100);
+  }
+
+  function init(){
+    document.querySelectorAll('.compare').forEach(c=>{
+      // 1) 右图塞进遮罩 .reveal（只做一次）
+      let right = c.querySelector('.img-right');
       if (right && !right.parentElement.classList.contains('reveal')) {
-        // 创建遮罩并把右图塞进去
         const wrap = document.createElement('div');
         wrap.className = 'reveal';
         right.replaceWith(wrap);
         wrap.appendChild(right);
       }
-      const slider = c.querySelector('.slider');
       const reveal = c.querySelector('.reveal');
+      const slider = c.querySelector('.slider');
+      if (!reveal) return;
 
-      // 安全兜底：如果没有找到任何元素，跳过
-      if (!slider || !reveal) return;
+      // 2) 初始 50%，或用 slider 当前值
+      const set = v => {
+        v = Math.max(0, Math.min(100, +v || 50));
+        reveal.style.width = v + '%';
+        if (slider) slider.value = v;
+      };
+      set(slider && slider.value ? slider.value : 50);
 
-      // 初始位置
-      const set = v => (reveal.style.width = Math.max(0, Math.min(100, +v || 50)) + '%');
-      set(slider.value || 50);
+      // 3) 给容器本身加拖拽（鼠标+触摸），不用依赖 range
+      let drag = false;
+      const start = e => { drag = true; set(pctFromEvent(e, c)); e.preventDefault(); };
+      const move  = e => { if (!drag) return; set(pctFromEvent(e, c)); e.preventDefault(); };
+      const end   = () => { drag = false; };
 
-      // 监听拖动
-      slider.addEventListener('input', e => set(e.target.value));
-      slider.addEventListener('change', e => set(e.target.value));
+      c.addEventListener('mousedown', start);
+      c.addEventListener('touchstart', start, {passive:false});
+      window.addEventListener('mousemove', move, {passive:false});
+      window.addEventListener('touchmove', move, {passive:false});
+      window.addEventListener('mouseup', end);
+      window.addEventListener('touchend', end);
 
-      // 确保滑块在顶层并可交互
-      slider.style.pointerEvents = 'auto';
-      slider.style.zIndex = 20;
-    });
+      // 4) 仍然兼容原来的 slider（如果你想拖那条细线也可以）
+      if (slider){
+        slider.addEventListener('input', e => set(e.target.value));
+        slider.style.pointerEvents = 'auto';
+        slider.style.zIndex = 20;
+      }
 
-    // 调试：任何图片加载失败时给容器打标
-    root.querySelectorAll('.compare img').forEach(img=>{
-      img.addEventListener('error', ()=>{
-        const b = img.closest('.compare');
-        if (b) b.classList.add('compare--error');
-        console.error('[IMG FAIL]', img.currentSrc || img.src);
+      // 5) 调试：有图没加载时在右上角提示
+      c.querySelectorAll('img').forEach(img=>{
+        img.addEventListener('error', ()=>{
+          c.classList.add('compare--error'); // 右上角会显示 "image missing"
+          console.error('[IMG FAIL]', img.currentSrc || img.src);
+        });
       });
     });
   }
 
-  document.addEventListener('DOMContentLoaded', () => initComparisons());
-  window.addEventListener('load', () => initComparisons());
+  document.addEventListener('DOMContentLoaded', init);
+  window.addEventListener('load', init);
 })();
+</script>
