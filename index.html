@@ -9,6 +9,52 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=17">
+
+  <style>
+/* 对比容器：固定高度，取消白边（cover），标签不挡事件 */
+.compare{
+  position:relative; width:100%;
+  height:560px; border-radius:12px; overflow:hidden;
+  background:transparent; box-shadow:0 8px 30px rgba(0,0,0,.08);
+  cursor: ew-resize; touch-action: none; user-select: none; -webkit-user-select: none;
+}
+@media (max-width:900px){ .compare{ height: clamp(280px, 58vw, 420px); } }
+
+.compare .img, .compare .reveal>img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit: cover; object-position:center;
+  -webkit-user-drag:none; user-select:none; -webkit-user-select:none; pointer-events:none;
+}
+.compare .img-left{ z-index:1; }
+.compare .reveal{ position:absolute; inset:0; width:50%; overflow:hidden; z-index:2; }
+
+/* 滑块：全域可拖，确保在最上层 */
+.compare .slider{
+  -webkit-appearance:none; appearance:none;
+  position:absolute; inset:0; width:100%; height:100%;
+  background:transparent; z-index:20 !important;
+  cursor: ew-resize; touch-action:none; pointer-events:auto;
+}
+.compare .slider::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none;
+  width:2px; height:100%; background:#000; border:none; box-shadow:0 0 0 9999px transparent;
+}
+
+/* 标签不拦截事件 */
+.compare .labels{
+  position:absolute; left:0; right:0; bottom:10px; z-index:6;
+  display:flex; justify-content:space-between; padding:0 12px;
+  font-size:12px; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.5); pointer-events:none;
+}
+.compare .label{ background:rgba(0,0,0,.36); padding:4px 8px; border-radius:6px; }
+
+/* 加载失败标注（可留作调试） */
+.compare.compare--error::after{
+  content:'image missing';
+  position:absolute; top:8px; right:8px; z-index:10;
+  background:#000a; color:#fff; font-size:12px; padding:4px 6px; border-radius:6px;
+}
+</style>
 </head>
 <body>
 
@@ -113,17 +159,15 @@
   <article class="pair">
     <h3>Apprentice Swordswoman</h3>
     <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <!-- 左：Midjourney（底图，外层） -->
+      <!-- 左：Midjourney（底图） -->
       <img class="img img-left"
-           src="assets/mj_swordswoman.jpeg?v=21"
-           alt="Midjourney · apprentice swordswoman"
-           onerror="this.onerror=null;this.src='assets/mj_swordswoman.jpg?v=21';">
-      <!-- 右：Wenxin（包在 .reveal 里面） -->
+           src="assets/mj_swordswoman.jpeg?v=30"
+           alt="Midjourney · apprentice swordswoman">
+      <!-- 右：Wenxin（遮罩内） -->
       <div class="reveal">
         <img class="img img-right"
-             src="assets/wx_swordswoman.png?v=21"
-             alt="Wenxin Yige · apprentice swordswoman"
-             onerror="this.onerror=null;this.src='assets/wx_swordswoman.jpg?v=21';">
+             src="assets/wx_swordswoman.png?v=30"
+             alt="Wenxin Yige · apprentice swordswoman">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
       <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
@@ -135,14 +179,13 @@
     <h3>Apprentice Archer</h3>
     <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
       <img class="img img-left"
-           src="assets/mj-archer.jpeg?v=21"
+           src="assets/mj-archer.jpeg?v=30"
            alt="Midjourney · apprentice archer"
-           onerror="this.onerror=null;this.src='assets/mj_archer.jpeg?v=21';">
+           onerror="this.onerror=null;this.src='assets/mj_archer.jpeg?v=30';">
       <div class="reveal">
         <img class="img img-right"
-             src="assets/wx_archer.png?v=21"
-             alt="Wenxin Yige · apprentice archer"
-             onerror="this.onerror=null;this.src='assets/wx_archer.jpg?v=21';">
+             src="assets/wx_archer.png?v=30"
+             alt="Wenxin Yige · apprentice archer">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
       <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
@@ -154,14 +197,12 @@
     <h3>Young Forest Guardian</h3>
     <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
       <img class="img img-left"
-           src="assets/mj_forest_guardian.jpeg?v=21"
-           alt="Midjourney · young forest guardian"
-           onerror="this.onerror=null;this.src='assets/mj_forest_guardian.jpg?v=21';">
+           src="assets/mj_forest_guardian.jpeg?v=30"
+           alt="Midjourney · young forest guardian">
       <div class="reveal">
         <img class="img img-right"
-             src="assets/wx_forest_guardian.png?v=21"
-             alt="Wenxin Yige · young forest guardian"
-             onerror="this.onerror=null;this.src='assets/wx_forest_guardian.jpg?v=21';">
+             src="assets/wx_forest_guardian.png?v=30"
+             alt="Wenxin Yige · young forest guardian">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
       <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
@@ -274,6 +315,53 @@
   // DOM 就绪 & 资源加载后都再跑一遍，避免竞态
   document.addEventListener('DOMContentLoaded', init);
   window.addEventListener('load', init);
+})();
+</script>
+
+  <script>
+(function(){
+  function initCompare(c){
+    // 自动修复结构：确保右图在 .reveal 里
+    let right = c.querySelector('.img-right');
+    let reveal = c.querySelector('.reveal');
+    if (right && (!reveal || !reveal.contains(right))) {
+      if (!reveal){ reveal = document.createElement('div'); reveal.className='reveal'; c.appendChild(reveal); }
+      reveal.appendChild(right);
+    }
+    const slider = c.querySelector('.slider');
+    if (!reveal || !slider) return;
+
+    const set = v => { v = Math.max(0, Math.min(100, +v||50)); reveal.style.width = v + '%'; slider.value = v; };
+    set(slider.value || 50);
+
+    // 方案A：range可拖
+    slider.addEventListener('input', e => set(e.target.value));
+
+    // 方案B：容器任意处拖动（桌面+触摸）
+    let dragging = false;
+    const toPct = (clientX) => {
+      const r = c.getBoundingClientRect();
+      return ((clientX - r.left) / r.width) * 100;
+    };
+    const start = e => { dragging = true; set(toPct((e.touches?e.touches[0]:e).clientX)); e.preventDefault(); };
+    const move  = e => { if (!dragging) return; set(toPct((e.touches?e.touches[0]:e).clientX)); e.preventDefault(); };
+    const end   = () => { dragging = false; };
+
+    c.addEventListener('mousedown', start);
+    c.addEventListener('touchstart', start, {passive:false});
+    window.addEventListener('mousemove', move, {passive:false});
+    window.addEventListener('touchmove', move, {passive:false});
+    window.addEventListener('mouseup', end);
+    window.addEventListener('touchend', end);
+
+    // 调试：图片加载失败高亮
+    c.querySelectorAll('img').forEach(img=>{
+      img.addEventListener('error', ()=>{ c.classList.add('compare--error'); console.error('[IMG FAIL]', img.currentSrc||img.src); });
+    });
+  }
+  function boot(){ document.querySelectorAll('.compare').forEach(initCompare); }
+  document.addEventListener('DOMContentLoaded', boot);
+  window.addEventListener('load', boot);
 })();
 </script>
 </body>
