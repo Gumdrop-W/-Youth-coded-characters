@@ -91,21 +91,48 @@ img{ max-width:100%; height:auto; display:block; }
 .pair{ max-width:1100px; margin:34px auto; padding:0 0 18px; border-bottom:1px dashed var(--line); }
 
 /* Compare slider */
-.compare{ position:relative; width:100%; aspect-ratio:4/3; border-radius:12px; overflow:hidden;
-  background:#ddd; box-shadow:0 8px 30px rgba(0,0,0,.08); }
-.compare .img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.compare .img-left{ z-index:1; }
-.compare .img-right{ z-index:2; clip-path:polygon(50% 0,100% 0,100% 100%,50% 100%); transition:clip-path .05s linear; }
+/* ——对比组件：用遮罩容器而不是 clip-path—— */
+.compare{
+  position:relative; width:100%; aspect-ratio:4/3;
+  border-radius:12px; overflow:hidden; background:#ddd;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+
+/* 两张图都绝对定位铺满 */
+.compare .img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+}
+
+/* 右侧图放到一个“可变宽度”的遮罩容器里 */
+.compare .reveal{
+  position:absolute; inset:0;
+  width:50%;               /* 初始 50% 分割线 */
+  overflow:hidden;         /* 只显示右图被遮住的部分 */
+  z-index:2;
+}
+.compare .reveal > img{    /* 右图本体 */
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+}
+
+.compare .img-left{ z-index:1; } /* 左图在下层 */
+
 .compare .slider{
-  -webkit-appearance:none; appearance:none; position:absolute; inset:0; width:100%;
+  -webkit-appearance:none; appearance:none;
+  position:absolute; inset:0; width:100%;
   background:transparent; z-index:5; cursor:ew-resize;
 }
 .compare .slider::-webkit-slider-thumb{
-  -webkit-appearance:none; appearance:none; width:2px; height:100%; background:#000; border:none;
+  -webkit-appearance:none; appearance:none;
+  width:2px; height:100%; background:#000; border:none;
   box-shadow:0 0 0 9999px transparent;
 }
-.compare .labels{ position:absolute; inset:auto 0 10px 0; z-index:6; display:flex; justify-content:space-between;
-  padding:0 12px; font-size:12px; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.5); }
+
+/* 标签保持不变 */
+.compare .labels{
+  position:absolute; inset:auto 0 10px 0; z-index:6;
+  display:flex; justify-content:space-between; padding:0 12px;
+  font-size:12px; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.5);
+}
 .compare .label{ background:rgba(0,0,0,.36); padding:4px 8px; border-radius:6px; }
 
 .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:1100px; margin:0 auto 18px; }
