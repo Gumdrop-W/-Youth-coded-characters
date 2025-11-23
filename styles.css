@@ -94,49 +94,47 @@ img{ max-width:100%; height:auto; display:block; }
 
 .pair{ max-width:1100px; margin:34px auto; padding:0 0 18px; border-bottom:1px dashed var(--line); }
 
-/* ====== Compare slider (重置版) ====== */
+/* === Compare: 固定高度 + 填满裁切（无白边）=== */
 .compare{
-  position:relative;
-  width:100%;
-  height:560px;            /* 固定高度，避免抽动 */
-  border-radius:12px;
-  overflow:hidden;
-  background:#ddd;
-  box-shadow:0 8px 30px rgba(0,0,0,.08);
+  position: relative;
+  width: 100%;
+  height: 560px;              /* 统一视觉高度 */
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ddd;
+  box-shadow: 0 8px 30px rgba(0,0,0,.08);
 }
-@media (max-width: 800px){
-  .compare{ height:62vw; max-height:460px; }
-}
-
-/* 两张图：满铺，无白边 */
-.compare .img{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  object-fit:cover; object-position:center;
-  -webkit-user-drag:none; user-select:none; -webkit-user-select:none;
-  pointer-events:none;
+@media (max-width: 900px){
+  .compare{ height: 64vw; max-height: 460px; }
 }
 
-/* .reveal 容器由 JS 包裹右图 */
-.compare .reveal{
-  position:absolute; inset:0;
-  width:50%;                   /* 初始 50% */
-  overflow:hidden;
-  z-index:2;
-}
+/* 两张图都“填满裁切”到容器（去白边） */
+.compare .img,
 .compare .reveal > img{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  object-fit:cover; object-position:center;
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;          /* 关键：cover */
+  object-position: center;
+  -webkit-user-drag: none;
+  user-select: none; -webkit-user-select: none;
+  pointer-events: none;       /* 让交互都落在 slider 上 */
 }
 
-.compare .img-left{ z-index:1; }
+/* 右图放在一个可变宽度的遮罩容器里 */
+.compare .reveal{
+  position: absolute; inset: 0;
+  width: 50%;                 /* 初始 50% 分割线 */
+  overflow: hidden;
+  z-index: 2;
+  background: transparent;
+}
+.compare .img-left{ z-index: 1; }
 
 .compare .slider{
   -webkit-appearance:none; appearance:none;
   position:absolute; inset:0; width:100%;
-  background:transparent; z-index:10;
-  cursor:ew-resize; touch-action:none;
+  background:transparent; z-index:5; cursor:ew-resize;
+  touch-action: none;
 }
 .compare .slider::-webkit-slider-thumb{
   -webkit-appearance:none; appearance:none;
@@ -144,16 +142,19 @@ img{ max-width:100%; height:auto; display:block; }
   box-shadow:0 0 0 9999px transparent;
 }
 
-/* 标签 */
 .compare .labels{
-  position:absolute; left:0; right:0; bottom:10px; z-index:12;
+  position:absolute; inset:auto 0 10px 0; z-index:6;
   display:flex; justify-content:space-between; padding:0 12px;
-  color:#fff; font-size:12px; text-shadow:0 1px 2px rgba(0,0,0,.5);
+  font-size:12px; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.5);
 }
 .compare .label{ background:rgba(0,0,0,.36); padding:4px 8px; border-radius:6px; }
 
-.two-col{ display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:1100px; margin:0 auto 18px; }
-@media (max-width:960px){ .two-col{ grid-template-columns:1fr; } }
+/* 调试：有图没加载会提示（可留可删） */
+.compare.compare--error::after{
+  content:'image missing';
+  position:absolute; top:8px; right:8px; z-index:10;
+  background:#000a; color:#fff; font-size:12px; padding:4px 6px; border-radius:6px;
+}
 
 /* Feedback */
 .feedback{ max-width:900px; margin:0 auto; display:block; }
