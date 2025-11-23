@@ -5,56 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Code and Culture · Youth-Coded Characters</title>
   <meta name="description" content="A practice-led visual comparison of how AI platforms construct youth-coded characters under PG constraints." />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=17">
 
-  <style>
-/* 对比容器：固定高度，取消白边（cover），标签不挡事件 */
-.compare{
-  position:relative; width:100%;
-  height:560px; border-radius:12px; overflow:hidden;
-  background:transparent; box-shadow:0 8px 30px rgba(0,0,0,.08);
-  cursor: ew-resize; touch-action: none; user-select: none; -webkit-user-select: none;
-}
-@media (max-width:900px){ .compare{ height: clamp(280px, 58vw, 420px); } }
-
-.compare .img, .compare .reveal>img{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit: cover; object-position:center;
-  -webkit-user-drag:none; user-select:none; -webkit-user-select:none; pointer-events:none;
-}
-.compare .img-left{ z-index:1; }
-.compare .reveal{ position:absolute; inset:0; width:50%; overflow:hidden; z-index:2; }
-
-/* 滑块：全域可拖，确保在最上层 */
-.compare .slider{
-  -webkit-appearance:none; appearance:none;
-  position:absolute; inset:0; width:100%; height:100%;
-  background:transparent; z-index:20 !important;
-  cursor: ew-resize; touch-action:none; pointer-events:auto;
-}
-.compare .slider::-webkit-slider-thumb{
-  -webkit-appearance:none; appearance:none;
-  width:2px; height:100%; background:#000; border:none; box-shadow:0 0 0 9999px transparent;
-}
-
-/* 标签不拦截事件 */
-.compare .labels{
-  position:absolute; left:0; right:0; bottom:10px; z-index:6;
-  display:flex; justify-content:space-between; padding:0 12px;
-  font-size:12px; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.5); pointer-events:none;
-}
-.compare .label{ background:rgba(0,0,0,.36); padding:4px 8px; border-radius:6px; }
-
-/* 加载失败标注（可留作调试） */
-.compare.compare--error::after{
-  content:'image missing';
-  position:absolute; top:8px; right:8px; z-index:10;
-  background:#000a; color:#fff; font-size:12px; padding:4px 6px; border-radius:6px;
-}
-</style>
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="styles.css?v=20">
 </head>
 <body>
 
@@ -99,35 +57,48 @@
         </ul>
       </div>
       <figure class="intro-art ratio-3-2">
-        <img src="assets/compare.jpg" alt="Midjourney vs Wenxin Yige comparison">
+        <img src="assets/compare.jpg?v=20" alt="Midjourney vs Wenxin Yige comparison"
+             onerror="this.onerror=null;this.src='assets/brainstorm_game_prompts_en_4000x6000.png?v=20';">
         <figcaption class="tiny">Midjourney vs Wenxin Yige · aligned prompts (PG / non-sexualized)</figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- Midjourney -->
+  <!-- Midjourney platform -->
   <section id="midjourney" class="section platform">
     <div class="section-grid platform-two-col">
       <div>
         <h2>Midjourney</h2>
-        <p>Midjourney is a text-to-image platform based on diffusion models, primarily utilised via a Discord bot. Its default aesthetic leans towards photorealistic/fantasy styles. Under the ‘youthful’ character theme, heroic poses and fashion-inspired elements frequently appear; thus, PG-rated content and negative prompts (e.g., avoiding nudity/suggestive postures) are required to control output.</p>
+        <p>
+          Midjourney is a text-to-image platform based on diffusion models, primarily utilised via a Discord bot.
+          Its default aesthetic leans towards photorealistic/fantasy styles with pronounced lighting and intricate detail.
+          Under the ‘youthful’ character theme, heroic poses and fashion-inspired elements frequently appear; thus,
+          PG-rated content and negative prompts (e.g., avoiding nudity/suggestive postures) are required to control output.
+        </p>
       </div>
       <figure class="platform-art ratio-4-3">
-        <img src="assets/mj-compare.jpg" alt="Midjourney comparison grid">
+        <img src="assets/mj-compare.jpg?v=20" alt="Midjourney comparison grid"
+             onerror="this.onerror=null;this.src='assets/mj-compare.jpg?v=21';">
         <figcaption class="tiny">Midjourney · sample outputs under aligned prompts</figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- Wenxinyige -->
+  <!-- Wenxinyige platform -->
   <section id="wenxinyige" class="section platform section-alt">
     <div class="section-grid platform-two-col">
       <div>
         <h2>Wenxinyige</h2>
-        <p>Wenxin Yige is a text-to-image platform developed by Baidu, supporting Chinese prompts and multiple stylistic templates. Defaults lean towards cartoon/illustrative styles, soft palettes, and stylised elements. For ‘youthful’ characters, use PG-rated content and negative constraints (avoid nudity/suggestive poses) to manage output boundaries.</p>
+        <p>
+          Wenxin Yige is a text-to-image generation platform developed by Baidu, supporting Chinese prompts and multiple stylistic templates.
+          Its default aesthetic leans towards cartoon/illustrative styles, soft colour palettes, and stylised elements, often featuring
+          ‘traditional Chinese aesthetics’ and ‘cute-ification’. For ‘youthful’ characters, incorporate PG-rated content and negative constraints
+          (e.g., avoiding nudity or suggestive poses) to manage output boundaries.
+        </p>
       </div>
       <figure class="platform-art ratio-4-3">
-        <img src="assets/wx-compare.jpg" alt="Wenxinyige comparison grid">
+        <img src="assets/wx-compare.jpg?v=20" alt="Wenxinyige comparison grid"
+             onerror="this.onerror=null;this.src='assets/wx-compare.jpg?v=21';">
         <figcaption class="tiny">Wenxinyige · sample outputs under aligned prompts</figcaption>
       </figure>
     </div>
@@ -137,7 +108,7 @@
   <section id="keywords" class="section section-alt keywords">
     <div class="kw-grid">
       <figure class="kw-art">
-        <img src="assets/brainstorm_game_prompts_en_4000x6000.png" alt="Keyword mind map">
+        <img src="assets/brainstorm_game_prompts_en_4000x6000.png?v=20" alt="Keyword mind map">
       </figure>
       <div class="kw-copy">
         <h2 class="kw-title">Keyword</h2>
@@ -147,69 +118,56 @@
           <li><strong>Reproducible params:</strong> record platform, style tags, AR, and (if possible) random seed.</li>
           <li><strong>Publicly auditable:</strong> standardised naming; low-resolution examples for academic use only.</li>
         </ul>
-        <a class="btn btn-outline" href="assets/brainstorm_game_prompts_en_4000x6000.png" target="_blank" rel="noopener">View Image</a>
+        <a class="btn btn-outline" href="assets/brainstorm_game_prompts_en_4000x6000.png?v=20" target="_blank" rel="noopener">View Image</a>
       </div>
     </div>
   </section>
 
+  <!-- Comparisons -->
   <section id="comparisons" class="section">
-  <h2>Comparisons</h2>
+    <h2>Comparisons</h2>
 
-  <!-- 1) Swordswoman -->
-  <article class="pair">
-    <h3>Apprentice Swordswoman</h3>
-    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <!-- 左：Midjourney（底图） -->
-      <img class="img img-left"
-           src="assets/mj_swordswoman.jpeg?v=30"
-           alt="Midjourney · apprentice swordswoman">
-      <!-- 右：Wenxin（遮罩内） -->
-      <div class="reveal">
-        <img class="img img-right"
-             src="assets/wx_swordswoman.png?v=30"
-             alt="Wenxin Yige · apprentice swordswoman">
+    <!-- 1) Swordswoman -->
+    <article class="pair">
+      <h3>Apprentice Swordswoman</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <!-- 左：Midjourney -->
+        <img class="img img-left"  src="assets/mj_swordswoman.jpeg?v=20"  alt="Midjourney · apprentice swordswoman">
+        <!-- 右：Wenxin Yige -->
+        <img class="img img-right" src="assets/wx_swordswoman.png?v=20"   alt="Wenxin Yige · apprentice swordswoman">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
       </div>
-      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
-    </div>
-  </article>
+    </article>
 
-  <!-- 2) Archer -->
-  <article class="pair">
-    <h3>Apprentice Archer</h3>
-    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-left"
-           src="assets/mj-archer.jpeg?v=30"
-           alt="Midjourney · apprentice archer"
-           onerror="this.onerror=null;this.src='assets/mj_archer.jpeg?v=30';">
-      <div class="reveal">
+    <!-- 2) Archer -->
+    <article class="pair">
+      <h3>Apprentice Archer</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"
+             src="assets/mj_archer.jpeg?v=20"
+             alt="Midjourney · apprentice archer"
+             onerror="this.onerror=null;this.src='assets/mj-archer.jpeg?v=20';">
         <img class="img img-right"
-             src="assets/wx_archer.png?v=30"
+             src="assets/wx_archer.png?v=20"
              alt="Wenxin Yige · apprentice archer">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
       </div>
-      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
-    </div>
-  </article>
+    </article>
 
-  <!-- 3) Forest guardian -->
-  <article class="pair">
-    <h3>Young Forest Guardian</h3>
-    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-left"
-           src="assets/mj_forest_guardian.jpeg?v=30"
-           alt="Midjourney · young forest guardian">
-      <div class="reveal">
-        <img class="img img-right"
-             src="assets/wx_forest_guardian.png?v=30"
-             alt="Wenxin Yige · young forest guardian">
+    <!-- 3) Forest guardian -->
+    <article class="pair">
+      <h3>Young Forest Guardian</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"  src="assets/mj_forest_guardian.jpeg?v=20" alt="Midjourney · young forest guardian">
+        <img class="img img-right" src="assets/wx_forest_guardian.png?v=20"  alt="Wenxin Yige · young forest guardian">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
       </div>
-      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
-    </div>
-  </article>
-</section>
-  
+    </article>
+  </section>
+
   <!-- Analysis -->
   <section id="analysis" class="section section-alt">
     <h2>Analysis</h2>
@@ -222,23 +180,23 @@
   <!-- Feedback -->
   <section id="feedback" class="section">
     <h2>Feedback</h2>
-    <form class="feedback" onsubmit="return false;">
+    <form class="feedback" id="feedbackForm">
       <label>
         Your comment
-        <textarea placeholder="Short note about what you noticed (coverage, pose, style...)"></textarea>
+        <textarea name="comment" placeholder="Short note about what you noticed (coverage, pose, style...)"></textarea>
       </label>
       <div class="row">
         <label class="half">
           Name (optional)
-          <input type="text" placeholder="Your name" />
+          <input name="name" type="text" placeholder="Your name" />
         </label>
         <label class="half">
           Email (optional)
-          <input type="email" placeholder="name@example.com" />
+          <input name="email" type="email" placeholder="name@example.com" />
         </label>
       </div>
       <button class="btn" type="submit">Save locally</button>
-      <p class="tiny">This demo stores feedback locally in your browser (no server). Use the button in the footer to export JSON.</p>
+      <p class="tiny">This demo stores feedback locally in your browser (no server). Use “Export feedback JSON” below to download.</p>
     </form>
   </section>
 </main>
@@ -256,113 +214,7 @@
   </div>
 </footer>
 
-<script src="script.js?v=16"></script>
-  <script>
-/* Robust compare init: 支持鼠标/触控，拖拽容器任意位置即可滑动 */
-(function(){
-  function wire(compare){
-    const left   = compare.querySelector('.img-left');
-    let   reveal = compare.querySelector('.reveal');
-    let   right  = reveal ? reveal.querySelector('.img-right') : null;
-
-    // 万一结构写错，这里自动纠正：把右图包进 .reveal
-    if (!reveal && right) {
-      reveal = document.createElement('div');
-      reveal.className = 'reveal';
-      right.parentNode.insertBefore(reveal, right);
-      reveal.appendChild(right);
-    }
-
-    const slider = compare.querySelector('.slider');
-    if (!reveal || !slider || !left) return;
-
-    const setPercent = (p) => {
-      p = Math.max(0, Math.min(100, p));
-      reveal.style.width = p + '%';
-      slider.value = p;
-    };
-
-    // range → 改宽度
-    slider.addEventListener('input', e => setPercent(+e.target.value));
-
-    // 支持直接拖容器
-    let dragging = false;
-    const rectOf = () => compare.getBoundingClientRect();
-    const posToPercent = (clientX) => {
-      const r = rectOf();
-      return ( (clientX - r.left) / r.width ) * 100;
-    };
-
-    const onPointerDown = (e) => {
-      dragging = true;
-      compare.setPointerCapture && compare.setPointerCapture(e.pointerId || 0);
-      setPercent(posToPercent(e.clientX));
-    };
-    const onPointerMove = (e) => { if (dragging) setPercent(posToPercent(e.clientX)); };
-    const onPointerUp   = () => { dragging = false; };
-
-    compare.addEventListener('pointerdown', onPointerDown);
-    compare.addEventListener('pointermove', onPointerMove);
-    window.addEventListener('pointerup', onPointerUp);
-
-    // 初始 50%
-    setPercent(+slider.value || 50);
-  }
-
-  function init(){
-    document.querySelectorAll('.compare').forEach(wire);
-  }
-  // DOM 就绪 & 资源加载后都再跑一遍，避免竞态
-  document.addEventListener('DOMContentLoaded', init);
-  window.addEventListener('load', init);
-})();
-</script>
-
-  <script>
-(function(){
-  function initCompare(c){
-    // 自动修复结构：确保右图在 .reveal 里
-    let right = c.querySelector('.img-right');
-    let reveal = c.querySelector('.reveal');
-    if (right && (!reveal || !reveal.contains(right))) {
-      if (!reveal){ reveal = document.createElement('div'); reveal.className='reveal'; c.appendChild(reveal); }
-      reveal.appendChild(right);
-    }
-    const slider = c.querySelector('.slider');
-    if (!reveal || !slider) return;
-
-    const set = v => { v = Math.max(0, Math.min(100, +v||50)); reveal.style.width = v + '%'; slider.value = v; };
-    set(slider.value || 50);
-
-    // 方案A：range可拖
-    slider.addEventListener('input', e => set(e.target.value));
-
-    // 方案B：容器任意处拖动（桌面+触摸）
-    let dragging = false;
-    const toPct = (clientX) => {
-      const r = c.getBoundingClientRect();
-      return ((clientX - r.left) / r.width) * 100;
-    };
-    const start = e => { dragging = true; set(toPct((e.touches?e.touches[0]:e).clientX)); e.preventDefault(); };
-    const move  = e => { if (!dragging) return; set(toPct((e.touches?e.touches[0]:e).clientX)); e.preventDefault(); };
-    const end   = () => { dragging = false; };
-
-    c.addEventListener('mousedown', start);
-    c.addEventListener('touchstart', start, {passive:false});
-    window.addEventListener('mousemove', move, {passive:false});
-    window.addEventListener('touchmove', move, {passive:false});
-    window.addEventListener('mouseup', end);
-    window.addEventListener('touchend', end);
-
-    // 调试：图片加载失败高亮
-    c.querySelectorAll('img').forEach(img=>{
-      img.addEventListener('error', ()=>{ c.classList.add('compare--error'); console.error('[IMG FAIL]', img.currentSrc||img.src); });
-    });
-  }
-  function boot(){ document.querySelectorAll('.compare').forEach(initCompare); }
-  document.addEventListener('DOMContentLoaded', boot);
-  window.addEventListener('load', boot);
-})();
-</script>
+<!-- JS -->
+<script src="script.js?v=20"></script>
 </body>
 </html>
