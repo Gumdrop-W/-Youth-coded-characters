@@ -232,5 +232,45 @@
 
 <!-- JS -->
 <script src="script.js?v=13"></script>
+
+  <script>
+(function(){
+  function initComparisons(){
+    document.querySelectorAll('.compare').forEach(block=>{
+      // 把右图塞进遮罩容器（避免 clip-path 兼容问题）
+      const right = block.querySelector('.img-right');
+      if (right && !block.querySelector('.reveal')) {
+        const wrap = document.createElement('div');
+        wrap.className = 'reveal';
+        right.parentNode.insertBefore(wrap, right);
+        wrap.appendChild(right);
+      }
+      const slider = block.querySelector('.slider');
+      const reveal = block.querySelector('.reveal');
+      const set = v => { if (reveal) reveal.style.width = Math.max(0, Math.min(100, v)) + '%'; };
+      if (slider) {
+        set(slider.value || 50);
+        slider.addEventListener('input', e => set(e.target.value));
+        slider.addEventListener('change', e => set(e.target.value));
+        // 确保能点到滑块
+        slider.style.pointerEvents = 'auto';
+      }
+    });
+
+    // 日志：看是否有图片失败（第三组常见是右图没加载）
+    document.querySelectorAll('.compare img').forEach(img=>{
+      img.addEventListener('error', ()=>{
+        console.error('[IMG FAIL]', img.currentSrc || img.src);
+        const b = img.closest('.compare');
+        if (b) b.classList.add('compare--error');
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initComparisons);
+  window.addEventListener('load', initComparisons);
+})();
+</script>
+  
 </body>
 </html>
