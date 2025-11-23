@@ -1,37 +1,27 @@
 :root{
-  --bg:#F5EAEA;
-  --panel:#FFFFFF;
-  --ink:#141414;
-  --muted:#5b5b5b;
-  --line:#e7dede;
-  --btn:#111;
-  --btn-ink:#fff;
+  --bg:#F5EAEA; --panel:#FFFFFF; --ink:#141414; --muted:#5b5b5b;
+  --line:#e7dede; --btn:#111; --btn-ink:#fff;
   --serif:"Playfair Display", Georgia, "Times New Roman", serif;
 }
-
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; color:var(--ink); background:var(--bg);
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
 img{ max-width:100%; height:auto; display:block; }
 
+/* Top nav */
 .site-header{ border-bottom:1px solid var(--line); }
-.topnav{
-  position:sticky; top:0; z-index:50;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:14px 20px; background:var(--bg); border-bottom:1px solid var(--line);
-}
+.topnav{ position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between;
+  padding:14px 20px; background:var(--bg); border-bottom:1px solid var(--line); }
 .topnav a{ color:var(--ink); text-decoration:none; }
 .topnav .brand{ font-size:24px; font-weight:800; letter-spacing:.3px; }
 .topnav .links a{ margin-left:16px; font-size:14px; color:var(--muted); }
 .topnav .links a:hover{ color:var(--ink); }
 
+/* Hero */
 .hero{ padding:0; }
 .hero-split{ padding:36px 16px 56px; border-bottom:1px solid var(--line); }
-.hero-split .hero-inner{
-  max-width:1200px; margin:0 auto; display:grid;
-  grid-template-columns:minmax(0,1.1fr) minmax(320px,520px);
-  gap:56px; align-items:start;
-}
+.hero-split .hero-inner{ max-width:1200px; margin:0 auto; display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(320px,520px); gap:56px; align-items:start; }
 .display{ margin:0; font-family:var(--serif); font-weight:800; line-height:.92; letter-spacing:-.01em;
   font-size:clamp(72px,9vw,160px); }
 .lede{ color:var(--muted); font-size:16px; line-height:1.6; max-width:48ch; margin:12px 0 8px; }
@@ -41,28 +31,27 @@ img{ max-width:100%; height:auto; display:block; }
   .lede{ max-width:36em; }
 }
 
+/* Sections */
 .section{ padding:48px 20px; border-top:1px solid var(--line); }
 .section h2{ margin:0 0 16px; font-size:28px; }
 .section h3{ margin:0 0 10px; font-size:22px; }
 .section-alt{ background:#f8f0f0; }
 
-.section-grid{
-  max-width:1100px; margin:0 auto; display:grid; gap:28px;
-  grid-template-columns: 1.1fr .9fr;
-}
+.section-grid{ max-width:1100px; margin:0 auto; display:grid; gap:28px;
+  grid-template-columns: 1.1fr .9fr; }
 @media (max-width:960px){ .section-grid{ grid-template-columns:1fr; } }
 
 .bullets{ margin:0; padding-left:18px; line-height:1.6; }
 
+/* Intro image */
 .intro-art{ position:relative; width:100%; border-radius:12px; overflow:hidden;
   box-shadow:0 10px 30px rgba(0,0,0,.08); background:#eee; }
 .intro-art img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; }
 .intro-art.ratio-3-2{ aspect-ratio:3/2; }
-.intro-art.ratio-4-3{ aspect-ratio:4/3; }
-.intro-art.ratio-16-9{ aspect-ratio:16/9; }
 .intro-art figcaption{ margin-top:8px; color:var(--muted); text-align:right; font-size:12px; }
 @media (max-width:960px){ .intro-art figcaption{ text-align:left; } }
 
+/* Platform blocks */
 .platform-two-col{ grid-template-columns: clamp(320px,32vw,420px) 1fr; gap:32px; align-items:start; }
 @media (max-width:960px){ .platform-two-col{ grid-template-columns:1fr; } }
 .platform-art{ position:relative; width:100%; border-radius:12px; overflow:hidden;
@@ -72,11 +61,10 @@ img{ max-width:100%; height:auto; display:block; }
 .platform-art figcaption{ margin-top:8px; color:var(--muted); text-align:right; font-size:12px; }
 @media (max-width:960px){ .platform-art figcaption{ text-align:left; } }
 
+/* Keywords */
 .keywords{ padding:48px 0 56px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-.kw-grid{
-  max-width:1200px; margin:0 auto; display:grid; gap:40px; align-items:start; padding:0 16px;
-  grid-template-columns: minmax(260px,380px) 1fr;
-}
+.kw-grid{ max-width:1200px; margin:0 auto; display:grid; gap:40px; align-items:start; padding:0 16px;
+  grid-template-columns: minmax(260px,380px) 1fr; }
 .kw-art img{ border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.06); }
 .kw-title{ margin:0 0 12px; font-family:var(--serif); font-size:clamp(36px,5vw,64px); line-height:1; }
 .kw-bullets{ margin:0 0 18px; padding-left:1.1em; }
@@ -90,50 +78,21 @@ img{ max-width:100%; height:auto; display:block; }
 
 .pair{ max-width:1100px; margin:34px auto; padding:0 0 18px; border-bottom:1px dashed var(--line); }
 
-/* Compare slider */
-/* ——对比组件：用遮罩容器而不是 clip-path—— */
-.compare{
-  position:relative; width:100%; aspect-ratio:4/3;
-  border-radius:12px; overflow:hidden; background:#ddd;
-  box-shadow:0 8px 30px rgba(0,0,0,.08);
-}
+/* Compare slider — fixed size & no auto zoom */
+.compare{ position:relative; width:100%; height:520px; border-radius:12px; overflow:hidden;
+  background:#ddd; box-shadow:0 8px 30px rgba(0,0,0,.08); }
+@media (max-width:768px){ .compare{ height:60vw; max-height:420px; } }
 
-/* 两张图都绝对定位铺满 */
-.compare .img{
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-}
+.compare .img,
+.compare .reveal>img{ position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; object-position:center; background:#f6f6f6; }
+.compare .img-left{ z-index:1; }
+.compare .reveal{ position:absolute; inset:0; width:50%; overflow:hidden; z-index:2; }
 
-/* 右侧图放到一个“可变宽度”的遮罩容器里 */
-.compare .reveal{
-  position:absolute; inset:0;
-  width:50%;               /* 初始 50% 分割线 */
-  overflow:hidden;         /* 只显示右图被遮住的部分 */
-  z-index:2;
-}
-.compare .reveal > img{    /* 右图本体 */
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-}
-
-.compare .img-left{ z-index:1; } /* 左图在下层 */
-
-.compare .slider{
-  -webkit-appearance:none; appearance:none;
-  position:absolute; inset:0; width:100%;
-  background:transparent; z-index:5; cursor:ew-resize;
-}
-.compare .slider::-webkit-slider-thumb{
-  -webkit-appearance:none; appearance:none;
-  width:2px; height:100%; background:#000; border:none;
-  box-shadow:0 0 0 9999px transparent;
-}
-
-/* 标签保持不变 */
-.compare .labels{
-  position:absolute; inset:auto 0 10px 0; z-index:6;
-  display:flex; justify-content:space-between; padding:0 12px;
-  font-size:12px; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.5);
-}
-.compare .label{ background:rgba(0,0,0,.36); padding:4px 8px; border-radius:6px; }
+.compare img{ -webkit-user-drag:none; user-select:none; -webkit-user-select:none; pointer-events:none; }
+.compare .slider{ -webkit-appearance:none; appearance:none; position:absolute; inset:0; width:100%;
+  background:transparent; z-index:5; cursor:ew-resize; touch-action:none; }
+.compare .slider::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:2px; height:100%; background:#000; border:none; }
 
 .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:1100px; margin:0 auto 18px; }
 @media (max-width:960px){ .two-col{ grid-template-columns:1fr; } }
@@ -141,9 +100,7 @@ img{ max-width:100%; height:auto; display:block; }
 /* Feedback */
 .feedback{ max-width:900px; margin:0 auto; display:block; }
 .feedback label{ display:block; font-size:14px; margin-bottom:10px; }
-.feedback textarea, .feedback input{
-  width:100%; font:inherit; padding:12px; border:1px solid var(--line); border-radius:10px; background:#fff;
-}
+.feedback textarea, .feedback input{ width:100%; font:inherit; padding:12px; border:1px solid var(--line); border-radius:10px; background:#fff; }
 .feedback textarea{ min-height:120px; }
 .feedback .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .feedback .row .half{ display:block; }
@@ -152,83 +109,6 @@ img{ max-width:100%; height:auto; display:block; }
 .site-footer{ border-top:1px solid var(--line); padding:32px 20px; }
 .footer-grid{ max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; }
 
-/* ——锁定对比容器尺寸，图片不再“自动放大”—— */
-.compare{
-  /* 固定高度，不再用 aspect-ratio 自动拉伸 */
-  height: 520px;
-  aspect-ratio: auto;
-  position: relative;
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #ddd;
-  box-shadow: 0 8px 30px rgba(0,0,0,.08);
-}
-/* 手机端给个更稳的高度 */
-@media (max-width: 768px){
-  .compare{ height: 60vw; max-height: 420px; }
-}
-
-/* 两张图都“完整显示”在容器里（不裁切不缩放超出） */
-.compare .img,
-.compare .reveal > img{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: contain;      /* 关键：由 cover 改为 contain */
-  object-position: center;
-  background: #f6f6f6;      /* 留出空白的底色 */
-}
-
-/* 右图遮罩容器（如果你用了我之前的 .reveal 实现） */
-.compare .reveal{
-  position: absolute; inset: 0;
-  width: 50%;               /* 初始 50% 分割线 */
-  overflow: hidden;
-  z-index: 2;
-  background: transparent;
-}
-.compare .img-left{ z-index: 1; }
-
-/* 禁止图片被“拖动/长按”，避免浏览器触发缩放或拖拽预览 */
-.compare img{
-  -webkit-user-drag: none;
-  user-select: none;
-  -webkit-user-select: none;
-  pointer-events: none;     /* 触摸事件交给滑块 */
-}
-
-/* 滑块避免触控缩放（iOS 更稳） */
-.compare .slider{
-  -webkit-appearance: none; appearance: none;
-  position: absolute; inset: 0; width: 100%;
-  background: transparent; z-index: 5; cursor: ew-resize;
-  touch-action: none;       /* 关键：阻止触控缩放/手势冲突 */
-}
-.compare .slider::-webkit-slider-thumb{
-  -webkit-appearance: none; appearance: none;
-  width: 2px; height: 100%; background: #000; border: none;
-  box-shadow: 0 0 0 9999px transparent;
-}
-
-.compare{ position:relative; width:100%; height:520px; border-radius:12px; overflow:hidden;
-          background:#ddd; box-shadow:0 8px 30px rgba(0,0,0,.08); }
-@media (max-width:768px){ .compare{ height:60vw; max-height:420px; } }
-
-.compare .img,
-.compare .reveal>img{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:contain; object-position:center; background:#f6f6f6;
-}
-.compare .img-left{ z-index:1; }
-.compare .reveal{ position:absolute; inset:0; width:50%; overflow:hidden; z-index:2; }
-
-.compare img{ -webkit-user-drag:none; user-select:none; -webkit-user-select:none; pointer-events:none; }
-.compare .slider{ -webkit-appearance:none; appearance:none; position:absolute; inset:0; width:100%;
-                  background:transparent; z-index:5; cursor:ew-resize; touch-action:none; }
-.compare .slider::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:2px; height:100%; background:#000; border:none; }
-
-/* 如果某张图失败，在右上角给个提示（调试用，可删） */
-.compare.compare--error::after{
-  content:'image missing'; position:absolute; top:8px; right:8px; z-index:10;
-  background:#000a; color:#fff; font-size:12px; padding:4px 6px; border-radius:6px;
-}
+/* 调试：若某组图片缺失，显示提示 */
+.compare.compare--error::after{ content:'image missing'; position:absolute; top:8px; right:8px; z-index:10;
+  background:#000a; color:#fff; font-size:12px; padding:4px 6px; border-radius:6px; }
