@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Code and Culture · Youth-Coded Characters</title>
+  <meta name="description" content="A comparative visual audit of Midjourney (EN) and Wenxin Yige (CN) under youth-coded prompts." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="site-header">
+  <nav class="topnav">
+    <a class="brand" href="#top">Code and Culture</a>
+    <div class="links">
+      <a href="#intro">Intro</a>
+      <a href="#midjourney">Midjourney</a>
+      <a href="#wenxinyige">Wenxin Yige</a>
+      <a href="#keywords">Keywords</a>
+      <a href="#comparisons">Comparisons</a>
+      <a href="#analysis">Analysis</a>
+      <a href="#feedback">Feedback</a>
+    </div>
+  </nav>
+  <div class="hero">
+    <h1>Code and Culture:</h1>
+    <p class="lede">
+      A practice-led visual comparison of how generative AI platforms construct
+      youth-coded game characters under aligned prompts and PG constraints.
+      This page presents side-by-side/slider evidence, concise notes, and
+      reproducible metadata.
+    </p>
+  </div>
+</header>
+
+<main id="top">
+  <!-- Intro -->
+  <section id="intro" class="section">
+    <div class="section-grid">
+      <div>
+        <h2>Introduction</h2>
+        <ul class="bullets">
+          <li>Same prompts, different platforms (EN vs CN contexts).</li>
+          <li>PG / non-sexualized constraints applied across all images.</li>
+          <li>Focus dimensions: coverage, pose, style, palette, symbols.</li>
+          <li>Method: prompt parity + slider comparison + participant notes.</li>
+        </ul>
+      </div>
+      <figure class="thumb-grid">
+        <!-- Replace with your own intro thumbnails if you like -->
+        <img src="assets/intro_01.jpg" alt="Intro thumbnail 1" />
+        <img src="assets/intro_02.jpg" alt="Intro thumbnail 2" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- Midjourney -->
+  <section id="midjourney" class="section">
+    <div class="section-grid">
+      <div>
+        <h2>Midjourney</h2>
+        <p class="note">
+          Diffusion-based text-to-image via Discord. Tends toward semi-realistic /
+          heroic rendering, dramatic lighting and material detail. Good parameter
+          control (AR, seed, stylize) for reproducibility.
+        </p>
+        <ul class="bullets">
+          <li>Style: realism/semi-realism, functional gear, environmental narrative.</li>
+          <li>Default pose often neutral/controlled; higher coverage.</li>
+          <li>Record: <em>prompt, negatives, AR, seed, time</em>.</li>
+        </ul>
+      </div>
+      <figure class="contact-sheet">
+        <!-- Replace each cell with your Midjourney spritesheet or grid -->
+        <img src="assets/mj_grid.jpg" alt="Midjourney sample grid" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- Wenxinyige -->
+  <section id="wenxinyige" class="section">
+    <div class="section-grid">
+      <div>
+        <h2>Wenxin Yige</h2>
+        <p class="note">
+          Chinese text-to-image platform with strong support for CN prompts and style tags.
+          Frequently outputs anime/illustration, cleaner foregrounds, higher saturation.
+        </p>
+        <ul class="bullets">
+          <li>Style: anime/illustration, kawaii/symbolic tendencies.</li>
+          <li>Default pose often icon/turn-body; coverage can be lower by default.</li>
+          <li>Record: <em>prompt CN/EN, style tag, time</em>.</li>
+        </ul>
+      </div>
+      <figure class="contact-sheet">
+        <!-- Replace with your Wenxin Yige spritesheet or grid -->
+        <img src="assets/wx_grid.jpg" alt="Wenxin Yige sample grid" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- Keywords -->
+  <section id="keywords" class="section section-alt">
+    <div class="section-grid">
+      <figure class="mindmap">
+        <!-- Bilingual brainstorm image you generated (4K, 2:3). You can downscale if needed. -->
+        <img src="/mnt/data/brainstorm_game_prompts_en_clean_v3_4000x6000.png" alt="Brainstorm: prompt keywords" />
+      </figure>
+      <div>
+        <h2>Keyword</h2>
+        <p class="note">
+          Prompts follow CN/EN parity with negative constraints (PG / non-sexualized).
+          Metadata template includes: <em>platform, prompt EN/CN, style/params/seed,
+          time, negatives, notes</em>.
+        </p>
+        <p>
+          Download the prompt &amp; parameter template (CSV):<br>
+          <a class="btn" href="/mnt/data/prompt_keywords_template.csv" download>Download CSV</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparisons -->
+  <section id="comparisons" class="section">
+    <h2>Comparisons</h2>
+
+    <!-- 1. Apprentice Swordswoman -->
+    <article class="pair">
+      <h3>Apprentice Swordswoman</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <!-- Replace the two images below with your actual files -->
+        <img class="img img-left"  src="assets/mj_swordswoman.jpg" alt="Midjourney · apprentice swordswoman">
+        <img class="img img-right" src="assets/wx_swordswoman.jpg" alt="Wenxin Yige · apprentice swordswoman">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels">
+          <span class="label left">Midjourney</span>
+          <span class="label right">Wenxin Yige</span>
+        </div>
+      </div>
+      <figcaption class="meta">
+        EN prompt: <code>apprentice swordswoman, modest armor, neutral stance, wholesome, PG-rated — no cleavage, no lingerie, no provocative pose</code>
+      </figcaption>
+    </article>
+
+    <!-- 2. Apprentice Archer -->
+    <article class="pair">
+      <h3>Apprentice Archer</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"  src="assets/mj_archer.jpg" alt="Midjourney · apprentice archer">
+        <img class="img img-right" src="assets/wx_archer.jpg" alt="Wenxin Yige · apprentice archer">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels">
+          <span class="label left">Midjourney</span>
+          <span class="label right">Wenxin Yige</span>
+        </div>
+      </div>
+      <figcaption class="meta">
+        EN prompt: <code>apprentice archer, light gear, calm neutral stance, forest backdrop, modest clothing, PG-rated — no exposed skin, no overly tight clothing, no provocative pose</code>
+      </figcaption>
+    </article>
+
+    <!-- 3. Young Forest Guardian -->
+    <article class="pair">
+      <h3>Young Forest Guardian</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"  src="assets/mj_forest_guardian.jpg" alt="Midjourney · young forest guardian">
+        <img class="img img-right" src="assets/wx_forest_guardian.jpg" alt="Wenxin Yige · young forest guardian">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels">
+          <span class="label left">Midjourney</span>
+          <span class="label right">Wenxin Yige</span>
+        </div>
+      </div>
+      <figcaption class="meta">
+        EN prompt: <code>young forest guardian, friendly animal companion (deer or fox), modest cloak, neutral stance, soft green palette, PG-rated — no provocative pose</code>
+      </figcaption>
+    </article>
+  </section>
+
+  <!-- Analysis -->
+  <section id="analysis" class="section section-alt">
+    <h2>Analysis</h2>
+    <div class="two-col">
+      <p>
+        <strong>Patterns:</strong> Midjourney tends toward realism/semi-realism, higher
+        coverage and neutral stance with environmental narrative; Wenxin Yige tends toward
+        anime/illustration, icon-like poses, higher saturation and cleaner foregrounds.
+      </p>
+      <p>
+        <strong>Implications:</strong> Under the same “youth-coded + PG” semantics, platform
+        defaults still shape coverage, pose and gaze. For child/adolescent contexts, set
+        conservative defaults (modest clothing, neutral stance) and document negatives.
+      </p>
+    </div>
+    <figure class="wide">
+      <img src="assets/analysis_strip.jpg" alt="analysis strip (replace with your composite)" />
+    </figure>
+  </section>
+
+  <!-- Feedback -->
+  <section id="feedback" class="section">
+    <h2>Feedback</h2>
+    <form class="feedback" onsubmit="return false;">
+      <label>
+        Your comment
+        <textarea placeholder="Short note about what you noticed (coverage, pose, style...)"></textarea>
+      </label>
+      <div class="row">
+        <label class="half">
+          Name (optional)
+          <input type="text" placeholder="Your name"/>
+        </label>
+        <label class="half">
+          Email (optional)
+          <input type="email" placeholder="name@example.com"/>
+        </label>
+      </div>
+      <button class="btn" type="submit">Save locally</button>
+      <p class="tiny">
+        This demo stores feedback locally in your browser (no server). Export JSON via the button in the header menu.
+      </p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Youth-Coded Characters</h4>
+      <p class="tiny">Academic use · PG/non-sexualized imagery only · © 2025</p>
+    </div>
+    <div class="actions">
+      <button id="exportJson" class="btn btn-ghost">Export feedback JSON</button>
+      <a class="btn btn-ghost" href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
