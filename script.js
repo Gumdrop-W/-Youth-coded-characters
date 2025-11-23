@@ -176,3 +176,36 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.compare').forEach(initOne);
   });
 })();
+
+// 简单可靠：滑块值 = 右图遮罩宽度（%）
+// 额外支持点击/拖拽整个容器来滑动
+(function(){
+  function setWidth(el, v){
+    const reveal = el.querySelector('.reveal');
+    if(reveal) reveal.style.width = Math.max(0, Math.min(100, +v)) + '%';
+  }
+  function pctFromEvent(el, e){
+    const r = el.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+    return (x / r.width) * 100;
+  }
+  document.querySelectorAll('.compare').forEach(el=>{
+    const slider = el.querySelector('.slider');
+    if(!slider) return;
+    // 初始
+    setWidth(el, slider.value || 50);
+
+    // 改变滑块
+    slider.addEventListener('input', e=> setWidth(el, e.target.value));
+
+    // 容器拖动：鼠标 & 触摸
+    const drag = (e)=> setWidth(el, pctFromEvent(el, e));
+    el.addEventListener('pointerdown', e=>{
+      el.setPointerCapture(e.pointerId);
+      drag(e);
+    });
+    el.addEventListener('pointermove', e=>{ if(e.buttons) drag(e); });
+    el.addEventListener('touchstart', drag, {passive:true});
+    el.addEventListener('touchmove',  drag, {passive:true});
+  });
+})();
