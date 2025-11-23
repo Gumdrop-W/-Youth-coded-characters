@@ -221,15 +221,26 @@
       </div>
     </article>
 
-    <article class="pair">
-      <h3>Apprentice Archer</h3>
-      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-        <img class="img img-left"  src="assets/mj_archer.jpeg" alt="Midjourney · apprentice archer">
-        <img class="img img-right" src="assets/wx_archer.png"   alt="Wenxin Yige · apprentice archer">
-        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-        <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
-      </div>
-    </article>
+ <article class="pair" id="pair-archer">
+  <h3>Apprentice Archer</h3>
+  <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+    <img class="img img-left"
+         src="assets/mj_archer.jpeg?v=2"
+         alt="Midjourney · apprentice archer">
+
+    <img class="img img-right"
+         src="assets/wx_archer.png?v=2"
+         alt="Wenxin Yige · apprentice archer"
+         onerror="
+           if (this.src.includes('.png')) { this.src='assets/wx_archer.jpg?v=2'; }
+           else if (this.src.includes('.jpg')) { this.src='assets/wx_archer.jpeg?v=2'; }
+           else { this.src='assets/mj_archer.jpeg?v=2'; this.style.filter='grayscale(1)'; }
+         ">
+
+    <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+    <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
+  </div>
+</article>
 
     <article class="pair">
       <h3>Young Forest Guardian</h3>
@@ -296,5 +307,10 @@
 </footer>
 
 <script src="script.js?v=3"></script>
+  <script>
+document.querySelectorAll('.compare img').forEach(img=>{
+  img.addEventListener('error', ()=>console.error('Image failed to load:', img.getAttribute('src')));
+});
+</script>
 </body>
 </html>
