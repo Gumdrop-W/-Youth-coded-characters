@@ -14,6 +14,7 @@
     <div class="links">
       <a href="#intro">Intro</a>
       <a href="#keywords">Keywords</a>
+      <a href="#comparisons">Comparisons</a>
       <a href="#analysis">Analysis</a>
       <a href="#feedback">Feedback</a>
     </div>
@@ -41,8 +42,8 @@
         </ul>
       </div>
       <figure class="thumb-grid">
-        <img src="assets/brainstorm_game_prompts_en_clean_v3_4000x6000.png" alt="Keyword mindmap preview">
-        <img src="assets/brainstorm_game_prompts_en_clean_v3_4000x6000.png" alt="Keyword mindmap preview">
+        <img src="assets/brainstorm_game_prompts_en_4000x6000.png" alt="Keyword mindmap preview">
+        <img src="assets/brainstorm_game_prompts_en_4000x6000.png" alt="Keyword mindmap preview">
       </figure>
     </div>
   </section>
@@ -51,39 +52,75 @@
   <section id="keywords" class="section section-alt">
     <div class="section-grid">
       <figure class="mindmap">
-        <img src="assets/brainstorm_game_prompts_en_clean_v3_4000x6000.png"
+        <img src="assets/brainstorm_game_prompts_en_4000x6000.png"
              alt="Brainstorm: prompt keywords" />
       </figure>
       <div>
         <h2>Keyword</h2>
         <p class="note">
           Prompts follow EN/CN parity with negative constraints (PG / non-sexualized).
-          Metadata (prompt texts, parameters, notes) can be added later when more images are uploaded.
-        </p>
-        <p>
-          Tip: keep a small sheet with fields like <em>platform, prompt EN/CN, negatives, style tag,
-          AR, seed, datetime, file path, notes</em> for later reproducibility.
+          Metadata (prompt texts, parameters, notes) can be added later as needed.
         </p>
       </div>
     </div>
   </section>
 
-<section id="comparisons" class="section">
-  <h2>Comparisons</h2>
+  <!-- Comparisons -->
+  <section id="comparisons" class="section">
+    <h2>Comparisons</h2>
 
-  <article class="pair">
-    <h3>Apprentice Swordswoman</h3>
-    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-left"  src="assets/YOUR_MJ_IMAGE.jpg" alt="Midjourney · apprentice swordswoman">
-      <img class="img img-right" src="assets/YOUR_WX_IMAGE.jpg" alt="Wenxin Yige · apprentice swordswoman">
-      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels">
-        <span class="label left">Midjourney</span>
-        <span class="label right">Wenxin Yige</span>
+    <!-- 1. Apprentice Swordswoman -->
+    <article class="pair">
+      <h3>Apprentice Swordswoman</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"  src="assets/mj_swordswoman.jpeg" alt="Midjourney · apprentice swordswoman">
+        <img class="img img-right" src="assets/wx_swordswoman.png"  alt="Wenxin Yige · apprentice swordswoman">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels">
+          <span class="label left">Midjourney</span>
+          <span class="label right">Wenxin Yige</span>
+        </div>
       </div>
-    </div>
-  </article>
-</section>
+      <figcaption class="meta">
+        EN prompt: <code>apprentice swordswoman, modest armor, neutral stance, wholesome, PG-rated — no cleavage, no lingerie, no provocative pose</code>
+      </figcaption>
+    </article>
+
+    <!-- 2. Apprentice Archer -->
+    <article class="pair">
+      <h3>Apprentice Archer</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"  src="assets/mj_archer.jpeg" alt="Midjourney · apprentice archer">
+        <img class="img img-right" src="assets/wx_archer.png"   alt="Wenxin Yige · apprentice archer">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels">
+          <span class="label left">Midjourney</span>
+          <span class="label right">Wenxin Yige</span>
+        </div>
+      </div>
+      <figcaption class="meta">
+        EN prompt: <code>apprentice archer, light gear, calm neutral stance, forest backdrop, modest clothing, PG-rated — no exposed skin, no overly tight clothing, no provocative pose</code>
+      </figcaption>
+    </article>
+
+    <!-- 3. Young Forest Guardian -->
+    <article class="pair">
+      <h3>Young Forest Guardian</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"  src="assets/mj_forest_guardian.jpeg" alt="Midjourney · young forest guardian">
+        <img class="img img-right" src="assets/wx_forest_guardian.png"  alt="Wenxin Yige · young forest guardian">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels">
+          <span class="label left">Midjourney</span>
+          <span class="label right">Wenxin Yige</span>
+        </div>
+      </div>
+      <figcaption class="meta">
+        EN prompt: <code>young forest guardian, friendly animal companion (deer or fox), modest cloak, neutral stance, soft green palette, PG-rated — no provocative pose</code>
+      </figcaption>
+    </article>
+  </section>
+
   <!-- Analysis -->
   <section id="analysis" class="section section-alt">
     <h2>Analysis</h2>
