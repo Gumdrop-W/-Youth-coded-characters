@@ -242,3 +242,31 @@ html,body{ margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-sy
 .platform-art.ratio-3-2 { aspect-ratio: 3 / 2; }
 .platform-art.ratio-16-9{ aspect-ratio: 16 / 9; }
 .platform-art.ratio-4-3 { aspect-ratio: 4 / 3; }
+
+/* Keywords 版式（与示例一致） */
+.keywords{ padding:48px 0 56px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.kw-grid{
+  max-width:1200px; margin:0 auto; display:grid;
+  grid-template-columns: minmax(260px, 380px) 1fr;
+  gap:40px; align-items:start; padding:0 16px;
+}
+.kw-art img{
+  width:100%; height:auto; display:block;
+  border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+.kw-title{
+  margin:0 0 12px; font-family:var(--serif);
+  font-size:clamp(36px, 5vw, 64px); line-height:1;
+}
+.kw-bullets{ margin:0 0 18px; padding-left:1.1em; }
+.kw-bullets li{ margin:8px 0; }
+.btn.btn-outline{
+  display:inline-block; padding:10px 14px; border-radius:8px;
+  border:1px solid var(--ink); background:transparent; color:var(--ink);
+  font-size:14px; line-height:1; text-decoration:none;
+}
+.btn.btn-outline:hover{ background:rgba(0,0,0,.04); }
+@media (max-width: 960px){
+  .kw-grid{ grid-template-columns:1fr; gap:18px; }
+  .keywords{ padding:32px 0 40px; }
+}
