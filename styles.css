@@ -243,3 +243,29 @@ img{ max-width:100%; height:auto; display:block; }
   text-shadow: 0 1px 2px rgba(0,0,0,.5);
 }
 .compare .label{ background: rgba(0,0,0,.36); padding: 4px 8px; border-radius: 6px; }
+
+/* --- FIX: 对比图无白边、拖动不放大 --- */
+.compare{
+  height: clamp(360px, 55vw, 520px);
+  aspect-ratio: auto;              /* 不再随比例拉伸 */
+}
+.compare .img,
+.compare .reveal > img{
+  object-fit: cover !important;    /* 充满容器，必要时裁切边缘 */
+  object-position: center;
+  background: transparent;
+}
+.compare .reveal{                  /* 初始 50% 分割线 */
+  width: 50% !important;
+}
+@media (max-width: 768px){
+  .compare{ height: clamp(260px, 70vw, 440px); }
+}
+
+/* 若某张图加载失败会标注，方便排查 */
+.compare.compare--error::after{
+  content:'image missing';
+  position:absolute; top:8px; right:8px;
+  background:#000a; color:#fff; font-size:12px;
+  padding:4px 6px; border-radius:6px;
+}
