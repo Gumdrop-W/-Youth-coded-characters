@@ -1,65 +1,65 @@
-<script>
-(function(){
-  function pctFromEvent(e, el){
-    const r = el.getBoundingClientRect();
-    const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
-    const clamped = Math.max(0, Math.min(r.width, x));
-    return Math.round((clamped / r.width) * 100);
+// ===== Minimal compare slider =====
+function initCompare(block){
+  const left  = block.querySelector('.img-left');
+  let   right = block.querySelector('.img-right');
+
+  if (!left || !right) return;
+
+  // 把右图包进 .reveal 遮罩
+  if (!right.parentElement.classList.contains('reveal')) {
+    const wrap = document.createElement('div');
+    wrap.className = 'reveal';
+    right.replaceWith(wrap);
+    wrap.appendChild(right);
   }
 
-  function init(){
-    document.querySelectorAll('.compare').forEach(c=>{
-      // 1) 右图塞进遮罩 .reveal（只做一次）
-      let right = c.querySelector('.img-right');
-      if (right && !right.parentElement.classList.contains('reveal')) {
-        const wrap = document.createElement('div');
-        wrap.className = 'reveal';
-        right.replaceWith(wrap);
-        wrap.appendChild(right);
-      }
-      const reveal = c.querySelector('.reveal');
-      const slider = c.querySelector('.slider');
-      if (!reveal) return;
+  const reveal = block.querySelector('.reveal');
+  const slider = block.querySelector('.slider');
+  const set = v => { if (reveal) reveal.style.width = Math.max(0, Math.min(100, +v)) + '%'; };
 
-      // 2) 初始 50%，或用 slider 当前值
-      const set = v => {
-        v = Math.max(0, Math.min(100, +v || 50));
-        reveal.style.width = v + '%';
-        if (slider) slider.value = v;
-      };
-      set(slider && slider.value ? slider.value : 50);
+  // 初始
+  set(slider ? slider.value : 50);
 
-      // 3) 给容器本身加拖拽（鼠标+触摸），不用依赖 range
-      let drag = false;
-      const start = e => { drag = true; set(pctFromEvent(e, c)); e.preventDefault(); };
-      const move  = e => { if (!drag) return; set(pctFromEvent(e, c)); e.preventDefault(); };
-      const end   = () => { drag = false; };
+  if (slider) {
+    slider.addEventListener('input', e => set(e.target.value), {passive:true});
+    slider.addEventListener('change', e => set(e.target.value), {passive:true});
+    // 点击轨道直达位置
+    slider.addEventListener('pointerdown', e => {
+      const r = slider.getBoundingClientRect();
+      const v = ((e.clientX - r.left) / r.width) * 100;
+      slider.value = v; set(v);
+    });
+  }
+}
 
-      c.addEventListener('mousedown', start);
-      c.addEventListener('touchstart', start, {passive:false});
-      window.addEventListener('mousemove', move, {passive:false});
-      window.addEventListener('touchmove', move, {passive:false});
-      window.addEventListener('mouseup', end);
-      window.addEventListener('touchend', end);
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.compare').forEach(initCompare);
 
-      // 4) 仍然兼容原来的 slider（如果你想拖那条细线也可以）
-      if (slider){
-        slider.addEventListener('input', e => set(e.target.value));
-        slider.style.pointerEvents = 'auto';
-        slider.style.zIndex = 20;
-      }
-
-      // 5) 调试：有图没加载时在右上角提示
-      c.querySelectorAll('img').forEach(img=>{
-        img.addEventListener('error', ()=>{
-          c.classList.add('compare--error'); // 右上角会显示 "image missing"
-          console.error('[IMG FAIL]', img.currentSrc || img.src);
-        });
-      });
+  // ===== Feedback: local save + export =====
+  const form = document.getElementById('feedbackForm');
+  if (form) {
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      const list = JSON.parse(localStorage.getItem('feedback') || '[]');
+      list.push({ ...data, ts: new Date().toISOString() });
+      localStorage.setItem('feedback', JSON.stringify(list));
+      alert('Saved locally!');
+      form.reset();
     });
   }
 
-  document.addEventListener('DOMContentLoaded', init);
-  window.addEventListener('load', init);
-})();
-</script>
+  const exportBtn = document.getElementById('exportJson');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', ()=>{
+      const text = localStorage.getItem('feedback') || '[]';
+      const blob = new Blob([text], {type:'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'feedback.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  }
+});
