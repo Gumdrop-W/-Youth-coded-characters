@@ -1,44 +1,51 @@
-// Image compare slider
-document.querySelectorAll('.compare').forEach((cmp)=>{
-  const right = cmp.querySelector('.img-right');
-  const slider = cmp.querySelector('.slider');
-  const update = (val)=>{
-    const p = Math.min(100, Math.max(0, val));
-    right.style.clipPath = `polygon(0 0, ${p}% 0, ${p}% 100%, 0 100%)`;
-  };
-  update(slider.value);
-  slider.addEventListener('input', (e)=> update(e.target.value));
-});
-
-// Feedback: store to localStorage, export JSON
-const form = document.querySelector('.feedback');
-if (form){
-  form.addEventListener('submit', ()=>{
-    const comment = form.querySelector('textarea').value.trim();
-    const name = form.querySelector('input[type="text"]').value.trim();
-    const email = form.querySelector('input[type="email"]').value.trim();
-    const now = new Date().toISOString();
-    const rec = {now, name, email, comment};
-    const key = 'yc_feedback';
-    const arr = JSON.parse(localStorage.getItem(key) || '[]');
-    arr.push(rec);
-    localStorage.setItem(key, JSON.stringify(arr));
-    form.querySelector('textarea').value = '';
-    alert('Saved locally in your browser ✅');
+(function(){
+  // Compare sliders
+  document.querySelectorAll('.compare').forEach(block=>{
+    const slider = block.querySelector('.slider');
+    const right  = block.querySelector('.img-right');
+    const set = v => right && (right.style.clipPath =
+      `polygon(${v}% 0, 100% 0, 100% 100%, ${v}% 100%)`);
+    if (slider && right){
+      set(slider.value || 50);
+      slider.addEventListener('input', e => set(e.target.value));
+    }
   });
-}
 
-const exportBtn = document.getElementById('exportJson');
-if (exportBtn){
-  exportBtn.addEventListener('click', ()=>{
-    const key = 'yc_feedback';
-    const data = localStorage.getItem(key) || '[]';
-    const blob = new Blob([data], {type:'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'feedback.json';
-    document.body.appendChild(a);
-    a.click(); a.remove();
-    URL.revokeObjectURL(url);
+  // Feedback: store locally & export
+  const KEY = 'yc-feedback-v1';
+  const form = document.querySelector('.feedback');
+  const exportBtn = document.getElementById('exportJson');
+
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e){ return []; } };
+  const save = (arr) => localStorage.setItem(KEY, JSON.stringify(arr));
+
+  if (form){
+    form.addEventListener('submit', ()=>{
+      const comment = form.querySelector('textarea').value.trim();
+      const name    = form.querySelector('input[type="text"]').value.trim();
+      const email   = form.querySelector('input[type="email"]').value.trim();
+      if (!comment){ alert('Please write a short comment.'); return; }
+      const arr = load();
+      arr.push({ comment, name, email, ts:new Date().toISOString() });
+      save(arr);
+      form.reset();
+      alert('Saved locally.');
+    });
+  }
+
+  if (exportBtn){
+    exportBtn.addEventListener('click', ()=>{
+      const data = load();
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const url  = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'feedback.json'; a.click();
+      URL.revokeObjectURL(url);
+    });
+  }
+
+  // Debug: log failing images
+  document.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('error', ()=>console.error('[IMG FAIL]', img.currentSrc || img.src));
   });
-}
+})();
