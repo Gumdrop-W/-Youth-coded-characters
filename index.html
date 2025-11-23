@@ -6,95 +6,13 @@
   <title>Code and Culture · Youth-Coded Characters</title>
   <meta name="description" content="A practice-led visual comparison of how AI platforms construct youth-coded characters under PG constraints." />
 
-  <!-- 字体 -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=11">
-
-  <style>
-    :root{ --serif:"Playfair Display", Georgia, "Times New Roman", serif; }
-
-    /* --- HERO：左上署名 / 左大标题 / 右简介 --- */
-    .hero{ padding:0 !important; }
-    .hero-split{
-      position:relative; padding:36px 16px 56px;
-      background:var(--bg); border-bottom:1px solid var(--line);
-    }
-    .hero-split .hero-inner{
-      max-width:1200px; margin:0 auto;
-      display:grid; grid-template-columns:minmax(0,1.1fr) minmax(320px,520px);
-      gap:56px; align-items:start;
-    }
-    .hero-split .byline{
-      position:absolute; top:10px; left:16px;
-      font-size:12px; line-height:1.2; color:var(--muted);
-      pointer-events:none; z-index:3;
-    }
-    .hero-split .display{
-      grid-column:1 / 2; margin:0;
-      font-family:var(--serif); font-weight:800;
-      line-height:.92; letter-spacing:-0.01em;
-      font-size:clamp(72px, 9vw, 160px);
-    }
-    .hero-split .lede.right{
-      grid-column:2 / 3; align-self:start;
-      margin:12px 0 8px 0; color:var(--muted);
-      font-size:16px; line-height:1.6; max-width:48ch;
-    }
-    @media (max-width:900px){
-      .hero-split .hero-inner{ grid-template-columns:1fr; gap:18px; }
-      .hero-split .display{ font-size:clamp(56px,16vw,120px); }
-      .hero-split .lede.right{ grid-column:1 / -1; max-width:36em; }
-      .hero-split .byline{ top:8px; left:12px; }
-    }
-
-    /* --- Intro：左文案 + 右大图 --- */
-    .intro-two-col{ grid-template-columns: minmax(0, 420px) 1fr; }
-    @media (max-width: 960px){ .intro-two-col{ grid-template-columns:1fr; } }
-    .intro-art{
-      position:relative; width:100%; aspect-ratio: 3 / 2;
-      border-radius:12px; overflow:hidden;
-      box-shadow:0 10px 30px rgba(0,0,0,.08); background:#eee;
-    }
-    .intro-art img{
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; object-position:center;
-    }
-    .intro-art figcaption{ margin-top:8px; color:var(--muted); text-align:right; font-size:12px; }
-    @media (max-width:960px){ .intro-art figcaption{ text-align:left; } }
-
-    /* --- 平台介绍：左文案固定范围 + 右图等高等比--- */
-    .platform-two-col{
-      grid-template-columns: clamp(320px, 32vw, 420px) 1fr;
-      gap:32px; align-items:start;
-    }
-    @media (max-width:960px){ .platform-two-col{ grid-template-columns:1fr; } }
-    .platform-art{
-      position:relative; width:100%; border-radius:12px; overflow:hidden;
-      box-shadow:0 10px 30px rgba(0,0,0,.08); background:#eee;
-      max-height:520px;
-    }
-    .platform-art.ratio-4-3{ aspect-ratio:4 / 3; }
-    .platform-art img{
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; object-position:center;
-    }
-    .platform-art figcaption{ margin-top:8px; color:var(--muted); text-align:right; font-size:12px; }
-    @media (min-width:1280px){ .platform-art{ max-height:560px; } }
-    @media (max-width:960px){ .platform-art{ max-height:none; } .platform-art figcaption{ text-align:left; } }
-
-    /* --- 对比滑块 --- */
-    .compare{ position:relative; width:100%; aspect-ratio:4/3; border-radius:12px; overflow:hidden; background:#ddd; box-shadow:0 8px 30px rgba(0,0,0,.08); }
-    .compare .img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-    .compare .img-left{ z-index:1; }
-    .compare .img-right{ z-index:2; clip-path:polygon(0 0, 50% 0, 50% 100%, 0 100%); transition:clip-path .05s linear; }
-    .compare .slider{ -webkit-appearance:none; appearance:none; position:absolute; inset:0; width:100%; background:transparent; z-index:5; cursor:ew-resize; }
-    .compare .slider::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:2px; height:100%; background:#000; border:none; box-shadow:0 0 0 9999px transparent; }
-    .compare .labels{ position:absolute; inset:auto 0 10px 0; z-index:6; display:flex; justify-content:space-between; padding:0 12px; font-size:12px; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.5); }
-    .compare .label{ background:rgba(0,0,0,.36); padding:4px 8px; border-radius:6px; }
-  </style>
+  <!-- Main CSS (记得 push 最新 v=12 的 styles.css) -->
+  <link rel="stylesheet" href="styles.css?v=12">
 </head>
 <body>
 <header class="site-header">
@@ -112,16 +30,17 @@
   </nav>
 
   <!-- HERO -->
-<div class="hero hero-split">
-  <div class="hero-inner">
-    <h1 class="display">Code and<br>Culture:</h1>
-    <p class="lede right">
-      This project compares the ‘youthful’ characters generated by Midjourney and Wenxin Yige
-      under identical prompts. Through participant scoring and visual symbol coding, it identifies
-      the aesthetic inclinations and cultural preferences of the platforms.
-    </p>
+  <div class="hero hero-split">
+    <div class="hero-inner">
+      <h1 class="display">Code and<br>Culture:</h1>
+      <p class="lede right">
+        This project compares the ‘youthful’ characters generated by Midjourney and Wenxin Yige
+        under identical prompts. Through participant scoring and visual symbol coding, it identifies
+        the aesthetic inclinations and cultural preferences of the platforms.
+      </p>
+    </div>
   </div>
-</div>
+</header>
 
 <main id="top">
   <!-- Intro -->
@@ -185,82 +104,79 @@
   </section>
 
   <!-- Keywords -->
-<section id="keywords" class="section section-alt keywords">
-  <div class="kw-grid">
-    <!-- 左侧图片 -->
-    <figure class="kw-art">
-      <img src="assets/brainstorm_game_prompts_en_4000x6000.png"
-           alt="Keyword mind map">
-    </figure>
-
-    <!-- 右侧文案 -->
-    <div class="kw-copy">
-      <h2 class="kw-title">Keyword</h2>
-      <ul class="kw-bullets">
-        <li><strong>Cross-language alignment:</strong> Each theme provides bilingual Chinese–English versions, with semantic consistency verified through back-translation (e.g., age reference, posture, attire, colour palette).</li>
-        <li><strong>PG rating & negative constraints:</strong> Uniformly uses PG-rated, non-sexualised restrictions; excludes terms like nudity/suggestive poses/deep V-necks/fetishisation.</li>
-        <li><strong>Reproducible parameters:</strong> Records platform, style tags, aspect ratio, and (where possible) random seed to ensure repeatable generation.</li>
-        <li><strong>Publicly auditable:</strong> All prompts/metadata follow standard naming; examples are shown at low resolution and restricted to academic use.</li>
-      </ul>
-      <a class="btn btn-outline" href="assets/brainstorm_game_prompts_en_4000x6000.png" target="_blank" rel="noopener">View Image</a>
+  <section id="keywords" class="section section-alt keywords">
+    <div class="kw-grid">
+      <figure class="kw-art">
+        <img src="assets/brainstorm_game_prompts_en_4000x6000.png" alt="Keyword mind map">
+      </figure>
+      <div class="kw-copy">
+        <h2 class="kw-title">Keyword</h2>
+        <ul class="kw-bullets">
+          <li><strong>Cross-language alignment:</strong> Each theme provides bilingual Chinese–English versions, with semantic consistency verified through back-translation (e.g., age reference, posture, attire, colour palette).</li>
+          <li><strong>PG rating & negative constraints:</strong> Uniformly uses PG-rated, non-sexualised restrictions; excludes terms like nudity/suggestive poses/deep V-necks/fetishisation.</li>
+          <li><strong>Reproducible parameters:</strong> Records platform, style tags, aspect ratio, and (where possible) random seed to ensure repeatable generation.</li>
+          <li><strong>Publicly auditable:</strong> All prompts/metadata follow standard naming; examples are shown at low resolution and restricted to academic use.</li>
+        </ul>
+        <a class="btn btn-outline" href="assets/brainstorm_game_prompts_en_4000x6000.png" target="_blank" rel="noopener">View Image</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- Comparisons -->
   <section id="comparisons" class="section">
-  <h2>Comparisons</h2>
+    <h2>Comparisons</h2>
 
-  <!-- 1) Swordswoman -->
-  <article class="pair">
-    <h3>Apprentice Swordswoman</h3>
-    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-left"
-           src="assets/mj_swordswoman.jpeg?v=4"
-           alt="Midjourney · apprentice swordswoman"
-           onerror="if(this.src.includes('.jpeg'))this.src='assets/mj_swordswoman.jpg?v=4';else if(this.src.includes('.jpg'))this.src='assets/mj_swordswoman.png?v=4';else this.style.display='none';">
-      <img class="img img-right"
-           src="assets/wx_swordswoman.png?v=4"
-           alt="Wenxin Yige · apprentice swordswoman"
-           onerror="if(this.src.includes('.png'))this.src='assets/wx_swordswoman.jpg?v=4';else if(this.src.includes('.jpg'))this.src='assets/wx_swordswoman.jpeg?v=4';else this.style.display='none';">
-      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
-    </div>
-  </article>
+    <!-- 1) Swordswoman -->
+    <article class="pair">
+      <h3>Apprentice Swordswoman</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"
+             src="assets/mj_swordswoman.jpeg?v=5"
+             alt="Midjourney · apprentice swordswoman"
+             onerror="if(this.src.includes('.jpeg'))this.src='assets/mj_swordswoman.jpg?v=5';else if(this.src.includes('.jpg'))this.src='assets/mj_swordswoman.png?v=5';else this.style.display='none';">
+        <img class="img img-right"
+             src="assets/wx_swordswoman.png?v=5"
+             alt="Wenxin Yige · apprentice swordswoman"
+             onerror="if(this.src.includes('.png'))this.src='assets/wx_swordswoman.jpg?v=5';else if(this.src.includes('.jpg'))this.src='assets/wx_swordswoman.jpeg?v=5';else this.style.display='none';">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
+      </div>
+    </article>
 
-  <!-- 2) Archer -->
-  <article class="pair" id="pair-archer">
-    <h3>Apprentice Archer</h3>
-    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-left"
-           src="assets/mj_archer.jpeg?v=4"
-           alt="Midjourney · apprentice archer"
-           onerror="if(this.src.includes('.jpeg'))this.src='assets/mj_archer.jpg?v=4';else if(this.src.includes('.jpg'))this.src='assets/mj_archer.png?v=4';else this.style.display='none';">
-      <img class="img img-right"
-           src="assets/wx_archer.png?v=4"
-           alt="Wenxin Yige · apprentice archer"
-           onerror="if(this.src.includes('.png'))this.src='assets/wx_archer.jpg?v=4';else if(this.src.includes('.jpg'))this.src='assets/wx_archer.jpeg?v=4';else this.style.display='none';">
-      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
-    </div>
-  </article>
+    <!-- 2) Archer -->
+    <article class="pair" id="pair-archer">
+      <h3>Apprentice Archer</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"
+             src="assets/mj_archer.jpeg?v=5"
+             alt="Midjourney · apprentice archer"
+             onerror="if(this.src.includes('.jpeg'))this.src='assets/mj_archer.jpg?v=5';else if(this.src.includes('.jpg'))this.src='assets/mj_archer.png?v=5';else this.style.display='none';">
+        <img class="img img-right"
+             src="assets/wx_archer.png?v=5"
+             alt="Wenxin Yige · apprentice archer"
+             onerror="if(this.src.includes('.png'))this.src='assets/wx_archer.jpg?v=5';else if(this.src.includes('.jpg'))this.src='assets/wx_archer.jpeg?v=5';else this.style.display='none';">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
+      </div>
+    </article>
 
-  <!-- 3) Forest guardian -->
-  <article class="pair">
-    <h3>Young Forest Guardian</h3>
-    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-left"
-           src="assets/mj_forest_guardian.jpeg?v=4"
-           alt="Midjourney · young forest guardian"
-           onerror="if(this.src.includes('.jpeg'))this.src='assets/mj_forest_guardian.jpg?v=4';else if(this.src.includes('.jpg'))this.src='assets/mj_forest_guardian.png?v=4';else this.style.display='none';">
-      <img class="img img-right"
-           src="assets/wx_forest_guardian.png?v=4"
-           alt="Wenxin Yige · young forest guardian"
-           onerror="if(this.src.includes('.png'))this.src='assets/wx_forest_guardian.jpg?v=4';else if(this.src.includes('.jpg'))this.src='assets/wx_forest_guardian.jpeg?v=4';else this.style.display='none';">
-      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
-    </div>
-  </article>
-</section>
+    <!-- 3) Forest guardian -->
+    <article class="pair">
+      <h3>Young Forest Guardian</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"
+             src="assets/mj_forest_guardian.jpeg?v=5"
+             alt="Midjourney · young forest guardian"
+             onerror="if(this.src.includes('.jpeg'))this.src='assets/mj_forest_guardian.jpg?v=5';else if(this.src.includes('.jpg'))this.src='assets/mj_forest_guardian.png?v=5';else this.style.display='none';">
+        <img class="img img-right"
+             src="assets/wx_forest_guardian.png?v=5"
+             alt="Wenxin Yige · young forest guardian"
+             onerror="if(this.src.includes('.png'))this.src='assets/wx_forest_guardian.jpg?v=5';else if(this.src.includes('.jpg'))this.src='assets/wx_forest_guardian.jpeg?v=5';else this.style.display='none';">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
+      </div>
+    </article>
+  </section>
 
   <!-- Analysis -->
   <section id="analysis" class="section section-alt">
@@ -315,44 +231,19 @@
   </div>
 </footer>
 
-<script src="script.js?v=3"></script>
-  <script>
-document.querySelectorAll('.compare img').forEach(img=>{
-  img.addEventListener('error', ()=>console.error('Image failed to load:', img.getAttribute('src')));
-});
-</script>
-  
+<!-- 单一脚本：驱动滑块 & 打印加载失败的图片 -->
 <script>
-  // 初始化所有对比块 & 打印加载失败的图片路径
-  document.querySelectorAll('.compare').forEach(block => {
-    const slider = block.querySelector('.slider');
-    const right  = block.querySelector('.img-right');
-    const setClip = v => right && (right.style.clipPath =
-      `polygon(${v}% 0, 100% 0, 100% 100%, ${v}% 100%)`);
-    if (slider && right) {
-      setClip(slider.value || 50);
-      slider.addEventListener('input', e => setClip(e.target.value));
-      slider.addEventListener('change', e => setClip(e.target.value));
-    }
-  });
-  // 任何 <img> 失败都报到控制台，便于定位
-  document.querySelectorAll('img').forEach(img=>{
-    img.addEventListener('error', ()=>console.error('[IMG FAIL]', img.getAttribute('src')));
-  });
-</script>
-
-  <script>
-  // 驱动滑块
+  // 驱动所有对比块（默认右图显示 50%—100%）
   document.querySelectorAll('.compare').forEach(b=>{
     const s=b.querySelector('.slider'), r=b.querySelector('.img-right');
-    const clip=v=>r&&(r.style.clipPath=`polygon(${v}% 0,100% 0,100% 100%,${v}% 100%)`);
-    if(s&&r){ clip(s.value||50); s.addEventListener('input',e=>clip(e.target.value)); }
+    const set=v=>r&&(r.style.clipPath=`polygon(${v}% 0,100% 0,100% 100%,${v}% 100%)`);
+    if(s&&r){ set(s.value||50); s.addEventListener('input',e=>set(e.target.value)); }
   });
-  // 日志：哪张图失败
+
+  // 记录任何图片加载失败，方便定位文件名/后缀问题
   document.querySelectorAll('img').forEach(img=>{
-    img.addEventListener('error', ()=>console.error('[IMG FAIL]', img.getAttribute('src')));
+    img.addEventListener('error', ()=>console.error('[IMG FAIL]', img.currentSrc || img.src));
   });
 </script>
-  
 </body>
 </html>
