@@ -206,34 +206,48 @@ img{display:block;max-width:100%;height:auto}
 <section id="comparisons" class="section">
   <h2>Comparisons</h2>
 
-  <!-- 1) Swordswoman -->
+  <!-- 1) Swordswoman  左=Midjourney 右=Wenxin -->
   <article class="pair">
     <h3>Apprentice Swordswoman</h3>
-    <div class="compare"
-         data-left-label="Midjourney"
-         data-right-label="Wenxin Yige"
-         data-left="assets/mj_swordswoman.jpeg"
-         data-right="assets/wx_swordswoman.png"></div>
+    <div class="compare">
+      <!-- 左图（底层） -->
+      <img class="img img-left" src="assets/mj_swordswoman.jpeg" alt="Midjourney · apprentice swordswoman">
+      <!-- 右图（遮罩内） -->
+      <div class="reveal">
+        <img class="img img-right" src="assets/wx_swordswoman.png" alt="Wenxin Yige · apprentice swordswoman">
+      </div>
+      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+      <div class="labels"><span class="label">Midjourney</span><span class="label">Wenxin Yige</span></div>
+    </div>
   </article>
 
-  <!-- 2) Archer -->
+  <!-- 2) Archer  左=Midjourney 右=Wenxin（文件名兜底） -->
   <article class="pair">
     <h3>Apprentice Archer</h3>
-    <div class="compare"
-         data-left-label="Midjourney"
-         data-right-label="Wenxin Yige"
-         data-left="assets/mj-archer.jpeg,assets/mj_archer.jpeg"
-         data-right="assets/wx_archer.png"></div>
+    <div class="compare">
+      <img class="img img-left"
+           src="assets/mj-archer.jpeg"
+           onerror="this.onerror=null; this.src='assets/mj_archer.jpeg';"
+           alt="Midjourney · apprentice archer">
+      <div class="reveal">
+        <img class="img img-right" src="assets/wx_archer.png" alt="Wenxin Yige · apprentice archer">
+      </div>
+      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+      <div class="labels"><span class="label">Midjourney</span><span class="label">Wenxin Yige</span></div>
+    </div>
   </article>
 
-  <!-- 3) Forest guardian -->
+  <!-- 3) Forest guardian  左=Midjourney 右=Wenxin -->
   <article class="pair">
     <h3>Young Forest Guardian</h3>
-    <div class="compare"
-         data-left-label="Midjourney"
-         data-right-label="Wenxin Yige"
-         data-left="assets/mj_forest_guardian.jpeg"
-         data-right="assets/wx_forest_guardian.png"></div>
+    <div class="compare">
+      <img class="img img-left" src="assets/mj_forest_guardian.jpeg" alt="Midjourney · young forest guardian">
+      <div class="reveal">
+        <img class="img img-right" src="assets/wx_forest_guardian.png" alt="Wenxin Yige · young forest guardian">
+      </div>
+      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+      <div class="labels"><span class="label">Midjourney</span><span class="label">Wenxin Yige</span></div>
+    </div>
   </article>
 </section>
 
