@@ -132,11 +132,11 @@
       <h3>Apprentice Swordswoman</h3>
       <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
         <img class="img img-left"
-             src="assets/mj_swordswoman.jpeg?v=5"
+             src="assets/wx_swordswoman.png?v=5"
              alt="Midjourney · apprentice swordswoman"
              onerror="if(this.src.includes('.jpeg'))this.src='assets/mj_swordswoman.jpg?v=5';else if(this.src.includes('.jpg'))this.src='assets/mj_swordswoman.png?v=5';else this.style.display='none';">
         <img class="img img-right"
-             src="assets/wx_swordswoman.png?v=5"
+             src="assets/mj_swordswoman.jpeg?v=5"
              alt="Wenxin Yige · apprentice swordswoman"
              onerror="if(this.src.includes('.png'))this.src='assets/wx_swordswoman.jpg?v=5';else if(this.src.includes('.jpg'))this.src='assets/wx_swordswoman.jpeg?v=5';else this.style.display='none';">
         <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
@@ -148,10 +148,15 @@
     <article class="pair">
       <h3>Apprentice Archer</h3>
       <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-        <img class="img img-left"
-             src="assets/mj_archer.jpeg?v=5"
-             alt="Midjourney · apprentice archer"
-             onerror="if(this.src.includes('.jpeg'))this.src='assets/mj_archer.jpg?v=5';else if(this.src.includes('.jpg'))this.src='assets/mj_archer.png?v=5';else this.style.display='none';">
+       <!-- 左图：把 _ 改成 - -->
+<img class="img img-left"
+     src="assets/mj-archer.jpeg?v=6"
+     alt="Midjourney · apprentice archer"
+     onerror="
+       if (this.src.includes('.jpeg')) { this.src='assets/mj-archer.jpg?v=6'; }
+       else if (this.src.includes('.jpg')) { this.src='assets/mj-archer.png?v=6'; }
+       else { this.style.display='none'; }
+     ">
         <img class="img img-right"
              src="assets/wx_archer.png?v=5"
              alt="Wenxin Yige · apprentice archer"
