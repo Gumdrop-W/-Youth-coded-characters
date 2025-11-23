@@ -6,15 +6,13 @@
   <title>Code and Culture · Youth-Coded Characters</title>
   <meta name="description" content="A practice-led visual comparison of how AI platforms construct youth-coded characters under PG constraints." />
 
-  <!-- 字体（可选） -->
+  <!-- 字体  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 
-  <!-- 样式表加版本号破缓存 -->
   <link rel="stylesheet" href="styles.css?v=6">
 
-  <!-- HERO & INTRO 专用样式（内联，保证立刻生效） -->
   <style>
     :root{ --serif:"Playfair Display", Georgia, "Times New Roman", serif; }
 
@@ -52,7 +50,7 @@
       .hero-split .byline{ top:8px; left:12px; }
     }
 
-    /* Intro：左文案 + 右大图（固定比例 + 居中裁切） */
+    /* Intro：左文案 + 右大图 */
     .intro-two-col{ grid-template-columns: minmax(0, 420px) 1fr; }
     @media (max-width: 960px){ .intro-two-col{ grid-template-columns:1fr; } }
     .intro-art{
@@ -69,7 +67,7 @@
     }
     @media (max-width: 960px){ .intro-art figcaption{ text-align:left; } }
 
-    /* 对比滑块（与原样式一致，保证可用） */
+    /* 对比滑块 */
     .compare{ position:relative; width:100%; aspect-ratio:4/3; border-radius:12px; overflow:hidden; background:#ddd; box-shadow:0 8px 30px rgba(0,0,0,.08); }
     .compare .img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
     .compare .img-left{ z-index:1; }
