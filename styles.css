@@ -78,24 +78,91 @@ img{ max-width:100%; height:auto; display:block; }
 
 .pair{ max-width:1100px; margin:34px auto; padding:0 0 18px; border-bottom:1px dashed var(--line); }
 
-/* Compare slider — fixed size & no auto zoom */
-.compare{ position:relative; width:100%; height:520px; border-radius:12px; overflow:hidden;
-  background:#ddd; box-shadow:0 8px 30px rgba(0,0,0,.08); }
-@media (max-width:768px){ .compare{ height:60vw; max-height:420px; } }
+/* === Compare slider — final (no white borders, no zoom on drag) === */
+.compare{
+  position: relative;
+  width: 100%;
+  height: 560px;             /* 固定高度，防抖动 */
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;   /* 或者用 var(--bg) 保持一致： background: var(--bg); */
+  box-shadow: 0 8px 30px rgba(0,0,0,.08);
+}
+@media (max-width: 900px){
+  .compare{ height: clamp(280px, 58vw, 420px); }
+}
 
+/* 两张图都填满容器（无白边），保持中心对齐 */
 .compare .img,
-.compare .reveal>img{ position:absolute; inset:0; width:100%; height:100%;
-  object-fit:contain; object-position:center; background:#f6f6f6; }
-.compare .img-left{ z-index:1; }
-.compare .reveal{ position:absolute; inset:0; width:50%; overflow:hidden; z-index:2; }
+.compare .reveal > img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* 关键：由 contain 改为 cover */
+  object-position: center;   /* 想让人物更靠上可用 center top */
+  background: transparent;   /* 不再用浅灰底色，避免被误认为白边 */
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;      /* 让交互事件交给滑块 */
+}
 
-.compare img{ -webkit-user-drag:none; user-select:none; -webkit-user-select:none; pointer-events:none; }
-.compare .slider{ -webkit-appearance:none; appearance:none; position:absolute; inset:0; width:100%;
-  background:transparent; z-index:5; cursor:ew-resize; touch-action:none; }
-.compare .slider::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:2px; height:100%; background:#000; border:none; }
+/* 右图遮罩容器：改变宽度实现“滑动对比” */
+.compare .reveal{
+  position: absolute;
+  inset: 0;
+  width: 50%;                /* 初始 50% 分割 */
+  overflow: hidden;
+  z-index: 2;
+  background: transparent;
+}
 
-.two-col{ display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:1100px; margin:0 auto 18px; }
-@media (max-width:960px){ .two-col{ grid-template-columns:1fr; } }
+.compare .img-left{ z-index: 1; }
+
+/* 滑块：仅是一条可拖动的“竖线” */
+.compare .slider{
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: transparent;
+  z-index: 5;
+  cursor: ew-resize;
+  touch-action: none;        /* 避免移动端缩放干扰 */
+}
+.compare .slider::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 2px;
+  height: 100%;
+  background: #000;
+  border: none;
+  box-shadow: 0 0 0 9999px transparent;
+}
+
+/* 底部标签 */
+.compare .labels{
+  position: absolute;
+  inset: auto 0 10px 0;
+  z-index: 6;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
+.compare .label{ background: rgba(0,0,0,.36); padding: 4px 8px; border-radius: 6px; }
+
+/* 调试提示（有图片加载失败时会出现 "image missing"） */
+.compare.compare--error::after{
+  content: 'image missing';
+  position: absolute; top: 8px; right: 8px;
+  background: #000a; color: #fff; font-size: 12px;
+  padding: 4px 6px; border-radius: 6px; z-index: 10;
+}
 
 /* Feedback */
 .feedback{ max-width:900px; margin:0 auto; display:block; }
