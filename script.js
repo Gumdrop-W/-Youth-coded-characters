@@ -1,17 +1,26 @@
 (function(){
-  // Compare sliders
+  // ——初始化对比滑块（用遮罩容器控制右图宽度）——
   document.querySelectorAll('.compare').forEach(block=>{
+    const rightImg = block.querySelector('.img-right');
+    if (rightImg) {
+      // 创建遮罩容器并把右图塞进去
+      const wrap = document.createElement('div');
+      wrap.className = 'reveal';
+      rightImg.parentNode.insertBefore(wrap, rightImg);
+      wrap.appendChild(rightImg);
+    }
+
     const slider = block.querySelector('.slider');
-    const right  = block.querySelector('.img-right');
-    const set = v => right && (right.style.clipPath =
-      `polygon(${v}% 0, 100% 0, 100% 100%, ${v}% 100%)`);
-    if (slider && right){
+    const reveal = block.querySelector('.reveal');
+    const set = v => { if (reveal) reveal.style.width = v + '%'; };
+
+    if (slider) {
       set(slider.value || 50);
       slider.addEventListener('input', e => set(e.target.value));
     }
   });
 
-  // Feedback: store locally & export
+  // ——反馈表单（保持不变/按你现有的即可）——
   const KEY = 'yc-feedback-v1';
   const form = document.querySelector('.feedback');
   const exportBtn = document.getElementById('exportJson');
@@ -44,7 +53,7 @@
     });
   }
 
-  // Debug: log failing images
+  // ——日志：任何图片加载失败都打印出来，方便你定位文件名/后缀问题——
   document.querySelectorAll('img').forEach(img=>{
     img.addEventListener('error', ()=>console.error('[IMG FAIL]', img.currentSrc || img.src));
   });
