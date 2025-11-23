@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=16">
+  <link rel="stylesheet" href="styles.css?v=17">
 </head>
 <body>
 
@@ -113,13 +113,17 @@
   <article class="pair">
     <h3>Apprentice Swordswoman</h3>
     <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-right"
-           src="assets/mj_swordswoman.jpeg?v=7"
-           alt="Midjourney · apprentice swordswoman">
+      <!-- 左：Midjourney（底图） -->
+      <img class="img img-left"
+           src="assets/mj_swordswoman.jpeg?v=18"
+           alt="Midjourney · apprentice swordswoman"
+           onerror="this.onerror=null;this.src='assets/mj_swordswoman.jpg?v=18';">
+      <!-- 右：Wenxin（包在 .reveal 中） -->
       <div class="reveal">
-        <img class="img img-left"
-             src="assets/wx_swordswoman.png?v=7"
-             alt="Wenxin Yige · apprentice swordswoman">
+        <img class="img img-right"
+             src="assets/wx_swordswoman.png?v=18"
+             alt="Wenxin Yige · apprentice swordswoman"
+             onerror="this.onerror=null;this.src='assets/wx_swordswoman.jpg?v=18';">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
       <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
@@ -130,14 +134,17 @@
   <article class="pair">
     <h3>Apprentice Archer</h3>
     <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-right"
-     src="assets/mj-archer.jpeg?v=15"
-     alt="Midjourney · apprentice archer"
-     onerror="this.onerror=null; this.src='assets/mj_archer.jpeg?v=15';">
+      <!-- 左：Midjourney（底图） -->
+      <img class="img img-left"
+           src="assets/mj-archer.jpeg?v=18"
+           alt="Midjourney · apprentice archer"
+           onerror="this.onerror=null;this.src='assets/mj_archer.jpeg?v=18';">
+      <!-- 右：Wenxin（包在 .reveal 中） -->
       <div class="reveal">
-        <img class="img img-left"
-             src="assets/wx_archer.png?v=7"
-             alt="Wenxin Yige · apprentice archer">
+        <img class="img img-right"
+             src="assets/wx_archer.png?v=18"
+             alt="Wenxin Yige · apprentice archer"
+             onerror="this.onerror=null;this.src='assets/wx_archer.jpg?v=18';">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
       <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
@@ -148,20 +155,23 @@
   <article class="pair">
     <h3>Young Forest Guardian</h3>
     <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-right"
-           src="assets/mj_forest_guardian.jpeg?v=7"
-           alt="Midjourney · young forest guardian">
+      <!-- 左：Midjourney（底图） -->
+      <img class="img img-left"
+           src="assets/mj_forest_guardian.jpeg?v=18"
+           alt="Midjourney · young forest guardian"
+           onerror="this.onerror=null;this.src='assets/mj_forest_guardian.jpg?v=18';">
+      <!-- 右：Wenxin（包在 .reveal 中） -->
       <div class="reveal">
-        <img class="img img-left"
-             src="assets/wx_forest_guardian.png?v=7"
-             alt="Wenxin Yige · young forest guardian">
+        <img class="img img-right"
+             src="assets/wx_forest_guardian.png?v=18"
+             alt="Wenxin Yige · young forest guardian"
+             onerror="this.onerror=null;this.src='assets/wx_forest_guardian.jpg?v=18';">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
       <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
     </div>
   </article>
 </section>
-  
   <!-- Analysis -->
   <section id="analysis" class="section section-alt">
     <h2>Analysis</h2>
