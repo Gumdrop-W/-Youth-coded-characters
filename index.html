@@ -1,51 +1,236 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DIAG v1 · Youth-coded</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Code and Culture · Youth-Coded Characters</title>
+  <meta name="description" content="A practice-led visual comparison of how AI platforms construct youth-coded characters under PG constraints." />
 
-<!-- 彻底关缓存 -->
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
+  <!-- 字体（可选） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 
-<style>
-  :root{ --bg:#F5EAEA; --ink:#111; --muted:#666; }
-  html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;}
-  .diag{
-    padding:24px; background:#7d5eff; color:#fff; font-weight:800;
-    font-size:40px; text-align:center;
-  }
-  .hero{
-    display:grid; grid-template-columns:minmax(0,1fr) minmax(320px,520px);
-    gap:48px; align-items:start; max-width:1200px; margin:24px auto; padding:0 16px;
-  }
-  h1{font-size:clamp(64px,10vw,140px); line-height:.9; margin:0;}
-  p{margin:0}
-  .img{aspect-ratio:3/2; width:100%; border-radius:12px; overflow:hidden; background:#ddd}
-  .img>img{width:100%; height:100%; object-fit:cover}
-  @media (max-width:900px){ .hero{grid-template-columns:1fr} }
-</style>
+  <!-- 样式表加版本号破缓存 -->
+  <link rel="stylesheet" href="styles.css?v=6">
+
+  <!-- HERO & INTRO 专用样式（内联，保证立刻生效） -->
+  <style>
+    :root{ --serif:"Playfair Display", Georgia, "Times New Roman", serif; }
+
+    /* 头部大标题分栏：左署名/左大标题/右简介 */
+    .hero{ padding:0 !important; }
+    .hero-split{
+      position:relative; padding:36px 16px 56px;
+      background:var(--bg); border-bottom:1px solid var(--line);
+    }
+    .hero-split .hero-inner{
+      max-width:1200px; margin:0 auto;
+      display:grid; grid-template-columns:minmax(0,1.1fr) minmax(320px,520px);
+      gap:56px; align-items:start;
+    }
+    .hero-split .byline{
+      position:absolute; top:10px; left:16px;
+      font-size:12px; line-height:1.2; color:var(--muted);
+      pointer-events:none; z-index:3;
+    }
+    .hero-split .display{
+      grid-column:1 / 2; margin:0;
+      font-family:var(--serif); font-weight:800;
+      line-height:.92; letter-spacing:-0.01em;
+      font-size:clamp(72px, 9vw, 160px);
+    }
+    .hero-split .lede.right{
+      grid-column:2 / 3; align-self:start;
+      margin:12px 0 8px 0; color:var(--muted);
+      font-size:16px; line-height:1.6; max-width:48ch;
+    }
+    @media (max-width:900px){
+      .hero-split .hero-inner{ grid-template-columns:1fr; gap:18px; }
+      .hero-split .display{ font-size:clamp(56px,16vw,120px); }
+      .hero-split .lede.right{ grid-column:1 / -1; max-width:36em; }
+      .hero-split .byline{ top:8px; left:12px; }
+    }
+
+    /* Intro：左文案 + 右大图（固定比例 + 居中裁切） */
+    .intro-two-col{ grid-template-columns: minmax(0, 420px) 1fr; }
+    @media (max-width: 960px){ .intro-two-col{ grid-template-columns:1fr; } }
+    .intro-art{
+      position:relative; width:100%; aspect-ratio: 3 / 2;
+      border-radius:12px; overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.08); background:#eee;
+    }
+    .intro-art img{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; object-position:center;
+    }
+    .intro-art figcaption{
+      margin-top:8px; color:var(--muted); text-align:right; font-size:12px;
+    }
+    @media (max-width: 960px){ .intro-art figcaption{ text-align:left; } }
+
+    /* 对比滑块（与原样式一致，保证可用） */
+    .compare{ position:relative; width:100%; aspect-ratio:4/3; border-radius:12px; overflow:hidden; background:#ddd; box-shadow:0 8px 30px rgba(0,0,0,.08); }
+    .compare .img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .compare .img-left{ z-index:1; }
+    .compare .img-right{ z-index:2; clip-path:polygon(0 0, 50% 0, 50% 100%, 0 100%); transition:clip-path .05s linear; }
+    .compare .slider{ -webkit-appearance:none; appearance:none; position:absolute; inset:0; width:100%; background:transparent; z-index:5; cursor:ew-resize; }
+    .compare .slider::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:2px; height:100%; background:#000; border:none; box-shadow:0 0 0 9999px transparent; }
+    .compare .labels{ position:absolute; inset:auto 0 10px 0; z-index:6; display:flex; justify-content:space-between; padding:0 12px; font-size:12px; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.5); }
+    .compare .label{ background:rgba(0,0,0,.36); padding:4px 8px; border-radius:6px; }
+  </style>
 </head>
 <body>
+<header class="site-header">
+  <nav class="topnav">
+    <a class="brand" href="#top">Code and Culture</a>
+    <div class="links">
+      <a href="#intro">Intro</a>
+      <a href="#keywords">Keywords</a>
+      <a href="#comparisons">Comparisons</a>
+      <a href="#analysis">Analysis</a>
+      <a href="#feedback">Feedback</a>
+    </div>
+  </nav>
 
-<div class="diag">DIAG v1 — 如果你能看到这块紫色区域，说明线上已加载到新 index.html ✅</div>
-
-<section class="hero">
-  <div>
-    <h1>Code and<br>Culture:</h1>
-    <p style="color:var(--muted);margin-top:12px">
-      Diagnostic intro layout. 左侧大标题 / 右侧大图。确认这一版是否出现在你的网站上。
-    </p>
+  <!-- 新版 HERO：左署名 / 左大标题 / 右简介 -->
+  <div class="hero hero-split">
+    <div class="hero-inner">
+      <div class="byline">Wanqi<br><span>Internet Equalities</span></div>
+      <h1 class="display">Code and<br>Culture:</h1>
+      <p class="lede right">
+        This project compares the ‘youthful’ characters generated by Midjourney and Wenxin Yige
+        under identical prompts. Through participant scoring and visual symbol coding, it identifies
+        the aesthetic inclinations and cultural preferences of the platforms.
+      </p>
+    </div>
   </div>
-  <figure class="img">
-    <!-- 如果没有 compare.jpg，会自动退回到脑图 -->
-    <img src="assets/compare.jpg"
-         onerror="this.onerror=null;this.src='assets/brainstorm_game_prompts_en_4000x6000.png';"
-         alt="compare">
-  </figure>
-</section>
+</header>
 
+<main id="top">
+  <!-- Intro -->
+  <section id="intro" class="section">
+    <div class="section-grid intro-two-col">
+      <div>
+        <h2>Introduction</h2>
+        <ul class="bullets">
+          <li>Same semantic prompt across platforms; PG / non-sexualized defaults.</li>
+          <li>Observe: coverage, pose, style, palette, and cultural symbols.</li>
+          <li>Method: prompt parity + critical visual analysis + public presentation.</li>
+          <li>Reproducibility: record negatives, aspect ratio, seed, timestamp.</li>
+        </ul>
+      </div>
+      <figure class="intro-art">
+        <img src="assets/compare.jpg" alt="Midjourney vs Wenxin Yige comparison">
+        <figcaption class="tiny">Midjourney vs Wenxin Yige · aligned prompts (PG / non-sexualized)</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Keywords -->
+  <section id="keywords" class="section section-alt">
+    <div class="section-grid">
+      <figure class="mindmap">
+        <img src="assets/brainstorm_game_prompts_en_4000x6000.png" alt="Brainstorm: prompt keywords" />
+      </figure>
+      <div>
+        <h2>Keyword</h2>
+        <p class="note">
+          Prompts follow EN/CN parity with negative constraints (PG / non-sexualized).
+          Metadata (prompt texts, parameters, notes) can be added later as needed.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparisons -->
+  <section id="comparisons" class="section">
+    <h2>Comparisons</h2>
+
+    <article class="pair">
+      <h3>Apprentice Swordswoman</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"  src="assets/mj_swordswoman.jpeg" alt="Midjourney · apprentice swordswoman">
+        <img class="img img-right" src="assets/wx_swordswoman.png"  alt="Wenxin Yige · apprentice swordswoman">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
+      </div>
+    </article>
+
+    <article class="pair">
+      <h3>Apprentice Archer</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"  src="assets/mj_archer.jpeg" alt="Midjourney · apprentice archer">
+        <img class="img img-right" src="assets/wx_archer.png"   alt="Wenxin Yige · apprentice archer">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
+      </div>
+    </article>
+
+    <article class="pair">
+      <h3>Young Forest Guardian</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"  src="assets/mj_forest_guardian.jpeg" alt="Midjourney · young forest guardian">
+        <img class="img img-right" src="assets/wx_forest_guardian.png"  alt="Wenxin Yige · young forest guardian">
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Analysis -->
+  <section id="analysis" class="section section-alt">
+    <h2>Analysis</h2>
+    <div class="two-col">
+      <p><strong>Patterns:</strong> Under the same “youth-coded + PG” semantics, platform defaults
+        (style layer, pose templates, color strategy) still shape output. EN-context tools tend to
+        realism/semi-realism and functional gear; CN-context tools often adopt anime/illustration,
+        higher saturation, and icon-like poses.</p>
+      <p><strong>Implications:</strong> For child/adolescent contexts, set conservative defaults
+        (modest clothing, neutral stance) and document negative prompts. Maintain cross-language
+        prompt parity and record parameters (AR/seed/time) for reproducibility.</p>
+    </div>
+  </section>
+
+  <!-- Feedback -->
+  <section id="feedback" class="section">
+    <h2>Feedback</h2>
+    <form class="feedback" onsubmit="return false;">
+      <label>
+        Your comment
+        <textarea placeholder="Short note about what you noticed (coverage, pose, style...)"></textarea>
+      </label>
+      <div class="row">
+        <label class="half">
+          Name (optional)
+          <input type="text" placeholder="Your name"/>
+        </label>
+        <label class="half">
+          Email (optional)
+          <input type="email" placeholder="name@example.com"/>
+        </label>
+      </div>
+      <button class="btn" type="submit">Save locally</button>
+      <p class="tiny">
+        This demo stores feedback locally in your browser (no server). Use the button in the footer to export JSON.
+      </p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Youth-Coded Characters</h4>
+      <p class="tiny">Academic use · PG/non-sexualized imagery only · © 2025</p>
+    </div>
+    <div class="actions">
+      <button id="exportJson" class="btn btn-ghost">Export feedback JSON</button>
+      <a class="btn btn-ghost" href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js?v=2"></script>
 </body>
 </html>
