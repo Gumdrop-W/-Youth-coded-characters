@@ -1,29 +1,43 @@
 :root{
-  --bg:#F5EAEA; --panel:#FFFFFF; --ink:#141414; --muted:#5b5b5b;
-  --line:#e7dede; --btn:#111; --btn-ink:#fff;
+  --bg:#F5EAEA;
+  --panel:#FFFFFF;
+  --ink:#141414;
+  --muted:#5b5b5b;
+  --line:#e7dede;
+  --btn:#111;
+  --btn-ink:#fff;
   --serif:"Playfair Display", Georgia, "Times New Roman", serif;
 }
+
 *{ box-sizing:border-box; }
-html,body{ margin:0; padding:0; color:var(--ink); background:var(--bg);
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+html,body{
+  margin:0; padding:0; color:var(--ink); background:var(--bg);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
 img{ max-width:100%; height:auto; display:block; }
 
-/* Top nav */
 .site-header{ border-bottom:1px solid var(--line); }
-.topnav{ position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between;
-  padding:14px 20px; background:var(--bg); border-bottom:1px solid var(--line); }
+.topnav{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 20px; background:var(--bg); border-bottom:1px solid var(--line);
+}
 .topnav a{ color:var(--ink); text-decoration:none; }
 .topnav .brand{ font-size:24px; font-weight:800; letter-spacing:.3px; }
 .topnav .links a{ margin-left:16px; font-size:14px; color:var(--muted); }
 .topnav .links a:hover{ color:var(--ink); }
 
-/* Hero */
 .hero{ padding:0; }
 .hero-split{ padding:36px 16px 56px; border-bottom:1px solid var(--line); }
-.hero-split .hero-inner{ max-width:1200px; margin:0 auto; display:grid;
-  grid-template-columns:minmax(0,1.1fr) minmax(320px,520px); gap:56px; align-items:start; }
-.display{ margin:0; font-family:var(--serif); font-weight:800; line-height:.92; letter-spacing:-.01em;
-  font-size:clamp(72px,9vw,160px); }
+.hero-split .hero-inner{
+  max-width:1200px; margin:0 auto; display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(320px,520px);
+  gap:56px; align-items:start;
+}
+.display{
+  margin:0; font-family:var(--serif); font-weight:800; line-height:.92; letter-spacing:-.01em;
+  font-size:clamp(72px,9vw,160px);
+}
 .lede{ color:var(--muted); font-size:16px; line-height:1.6; max-width:48ch; margin:12px 0 8px; }
 @media (max-width:900px){
   .hero-split .hero-inner{ grid-template-columns:1fr; gap:18px; }
@@ -31,27 +45,28 @@ img{ max-width:100%; height:auto; display:block; }
   .lede{ max-width:36em; }
 }
 
-/* Sections */
 .section{ padding:48px 20px; border-top:1px solid var(--line); }
 .section h2{ margin:0 0 16px; font-size:28px; }
 .section h3{ margin:0 0 10px; font-size:22px; }
 .section-alt{ background:#f8f0f0; }
 
-.section-grid{ max-width:1100px; margin:0 auto; display:grid; gap:28px;
-  grid-template-columns: 1.1fr .9fr; }
+.section-grid{
+  max-width:1100px; margin:0 auto; display:grid; gap:28px;
+  grid-template-columns: 1.1fr .9fr;
+}
 @media (max-width:960px){ .section-grid{ grid-template-columns:1fr; } }
 
 .bullets{ margin:0; padding-left:18px; line-height:1.6; }
 
-/* Intro image */
 .intro-art{ position:relative; width:100%; border-radius:12px; overflow:hidden;
   box-shadow:0 10px 30px rgba(0,0,0,.08); background:#eee; }
 .intro-art img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; }
 .intro-art.ratio-3-2{ aspect-ratio:3/2; }
+.intro-art.ratio-4-3{ aspect-ratio:4/3; }
+.intro-art.ratio-16-9{ aspect-ratio:16/9; }
 .intro-art figcaption{ margin-top:8px; color:var(--muted); text-align:right; font-size:12px; }
 @media (max-width:960px){ .intro-art figcaption{ text-align:left; } }
 
-/* Platform blocks */
 .platform-two-col{ grid-template-columns: clamp(320px,32vw,420px) 1fr; gap:32px; align-items:start; }
 @media (max-width:960px){ .platform-two-col{ grid-template-columns:1fr; } }
 .platform-art{ position:relative; width:100%; border-radius:12px; overflow:hidden;
@@ -61,10 +76,11 @@ img{ max-width:100%; height:auto; display:block; }
 .platform-art figcaption{ margin-top:8px; color:var(--muted); text-align:right; font-size:12px; }
 @media (max-width:960px){ .platform-art figcaption{ text-align:left; } }
 
-/* Keywords */
 .keywords{ padding:48px 0 56px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-.kw-grid{ max-width:1200px; margin:0 auto; display:grid; gap:40px; align-items:start; padding:0 16px;
-  grid-template-columns: minmax(260px,380px) 1fr; }
+.kw-grid{
+  max-width:1200px; margin:0 auto; display:grid; gap:40px; align-items:start; padding:0 16px;
+  grid-template-columns: minmax(260px,380px) 1fr;
+}
 .kw-art img{ border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.06); }
 .kw-title{ margin:0 0 12px; font-family:var(--serif); font-size:clamp(36px,5vw,64px); line-height:1; }
 .kw-bullets{ margin:0 0 18px; padding-left:1.1em; }
@@ -78,96 +94,73 @@ img{ max-width:100%; height:auto; display:block; }
 
 .pair{ max-width:1100px; margin:34px auto; padding:0 0 18px; border-bottom:1px dashed var(--line); }
 
-/* === Compare slider — final (no white borders, no zoom on drag) === */
+/* ====== Compare slider (重置版) ====== */
 .compare{
-  position: relative;
-  width: 100%;
-  height: 560px;             /* 固定高度，防抖动 */
-  border-radius: 12px;
-  overflow: hidden;
-  background: transparent;   /* 或者用 var(--bg) 保持一致： background: var(--bg); */
-  box-shadow: 0 8px 30px rgba(0,0,0,.08);
+  position:relative;
+  width:100%;
+  height:560px;            /* 固定高度，避免抽动 */
+  border-radius:12px;
+  overflow:hidden;
+  background:#ddd;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
-@media (max-width: 900px){
-  .compare{ height: clamp(280px, 58vw, 420px); }
-}
-
-/* 两张图都填满容器（无白边），保持中心对齐 */
-.compare .img,
-.compare .reveal > img{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;         /* 关键：由 contain 改为 cover */
-  object-position: center;   /* 想让人物更靠上可用 center top */
-  background: transparent;   /* 不再用浅灰底色，避免被误认为白边 */
-  -webkit-user-drag: none;
-  user-select: none;
-  -webkit-user-select: none;
-  pointer-events: none;      /* 让交互事件交给滑块 */
+@media (max-width: 800px){
+  .compare{ height:62vw; max-height:460px; }
 }
 
-/* 右图遮罩容器：改变宽度实现“滑动对比” */
+/* 两张图：满铺，无白边 */
+.compare .img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center;
+  -webkit-user-drag:none; user-select:none; -webkit-user-select:none;
+  pointer-events:none;
+}
+
+/* .reveal 容器由 JS 包裹右图 */
 .compare .reveal{
-  position: absolute;
-  inset: 0;
-  width: 50%;                /* 初始 50% 分割 */
-  overflow: hidden;
-  z-index: 2;
-  background: transparent;
+  position:absolute; inset:0;
+  width:50%;                   /* 初始 50% */
+  overflow:hidden;
+  z-index:2;
+}
+.compare .reveal > img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center;
 }
 
-.compare .img-left{ z-index: 1; }
+.compare .img-left{ z-index:1; }
 
-/* 滑块：仅是一条可拖动的“竖线” */
 .compare .slider{
-  -webkit-appearance: none;
-  appearance: none;
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  background: transparent;
-  z-index: 5;
-  cursor: ew-resize;
-  touch-action: none;        /* 避免移动端缩放干扰 */
+  -webkit-appearance:none; appearance:none;
+  position:absolute; inset:0; width:100%;
+  background:transparent; z-index:10;
+  cursor:ew-resize; touch-action:none;
 }
 .compare .slider::-webkit-slider-thumb{
-  -webkit-appearance: none;
-  appearance: none;
-  width: 2px;
-  height: 100%;
-  background: #000;
-  border: none;
-  box-shadow: 0 0 0 9999px transparent;
+  -webkit-appearance:none; appearance:none;
+  width:2px; height:100%; background:#000; border:none;
+  box-shadow:0 0 0 9999px transparent;
 }
 
-/* 底部标签 */
+/* 标签 */
 .compare .labels{
-  position: absolute;
-  inset: auto 0 10px 0;
-  z-index: 6;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 12px;
-  font-size: 12px;
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+  position:absolute; left:0; right:0; bottom:10px; z-index:12;
+  display:flex; justify-content:space-between; padding:0 12px;
+  color:#fff; font-size:12px; text-shadow:0 1px 2px rgba(0,0,0,.5);
 }
-.compare .label{ background: rgba(0,0,0,.36); padding: 4px 8px; border-radius: 6px; }
+.compare .label{ background:rgba(0,0,0,.36); padding:4px 8px; border-radius:6px; }
 
-/* 调试提示（有图片加载失败时会出现 "image missing"） */
-.compare.compare--error::after{
-  content: 'image missing';
-  position: absolute; top: 8px; right: 8px;
-  background: #000a; color: #fff; font-size: 12px;
-  padding: 4px 6px; border-radius: 6px; z-index: 10;
-}
+.two-col{ display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:1100px; margin:0 auto 18px; }
+@media (max-width:960px){ .two-col{ grid-template-columns:1fr; } }
 
 /* Feedback */
 .feedback{ max-width:900px; margin:0 auto; display:block; }
 .feedback label{ display:block; font-size:14px; margin-bottom:10px; }
-.feedback textarea, .feedback input{ width:100%; font:inherit; padding:12px; border:1px solid var(--line); border-radius:10px; background:#fff; }
+.feedback textarea, .feedback input{
+  width:100%; font:inherit; padding:12px; border:1px solid var(--line); border-radius:10px; background:#fff;
+}
 .feedback textarea{ min-height:120px; }
 .feedback .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .feedback .row .half{ display:block; }
@@ -175,145 +168,3 @@ img{ max-width:100%; height:auto; display:block; }
 
 .site-footer{ border-top:1px solid var(--line); padding:32px 20px; }
 .footer-grid{ max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-
-/* 调试：若某组图片缺失，显示提示 */
-.compare.compare--error::after{ content:'image missing'; position:absolute; top:8px; right:8px; z-index:10;
-  background:#000a; color:#fff; font-size:12px; padding:4px 6px; border-radius:6px; }
-
-/* === Compare slider: fixed size + overlay + mask === */
-.compare{
-  position: relative;
-  width: 100%;
-  height: 520px;          /* 固定高度，防止拖动时“拉伸” */
-  border-radius: 12px;
-  overflow: hidden;
-  background: #ddd;
-  box-shadow: 0 8px 30px rgba(0,0,0,.08);
-}
-@media (max-width: 768px){
-  .compare{ height: 60vw; max-height: 420px; }
-}
-
-/* 左图直接铺满容器 */
-.compare .img{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: contain;       /* 不裁图，留边即可 */
-  object-position: center;
-  background: #f6f6f6;
-}
-.compare .img-left{ z-index: 1; }
-
-/* 右图放到遮罩容器里，用 width 控制显露比例 */
-.compare .reveal{
-  position: absolute; inset: 0;
-  width: 50%;               /* 初始 50% */
-  overflow: hidden;
-  z-index: 2;
-}
-.compare .reveal > img{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: contain;
-  object-position: center;
-  background: #f6f6f6;
-}
-
-/* 滑块条 */
-.compare .slider{
-  -webkit-appearance: none; appearance: none;
-  position: absolute; inset: 0;
-  width: 100%;
-  background: transparent;
-  z-index: 5;
-  cursor: ew-resize;
-  touch-action: none;       /* 防止触控缩放冲突 */
-}
-.compare .slider::-webkit-slider-thumb{
-  -webkit-appearance: none; appearance: none;
-  width: 2px; height: 100%;
-  background: #000; border: none;
-}
-
-/* 标签 */
-.compare .labels{
-  position: absolute; left: 0; right: 0; bottom: 10px;
-  z-index: 6; display: flex; justify-content: space-between;
-  padding: 0 12px; font-size: 12px; color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,.5);
-}
-.compare .label{ background: rgba(0,0,0,.36); padding: 4px 8px; border-radius: 6px; }
-
-/* --- FIX: 对比图无白边、拖动不放大 --- */
-.compare{
-  height: clamp(360px, 55vw, 520px);
-  aspect-ratio: auto;              /* 不再随比例拉伸 */
-}
-.compare .img,
-.compare .reveal > img{
-  object-fit: cover !important;    /* 充满容器，必要时裁切边缘 */
-  object-position: center;
-  background: transparent;
-}
-.compare .reveal{                  /* 初始 50% 分割线 */
-  width: 50% !important;
-}
-@media (max-width: 768px){
-  .compare{ height: clamp(260px, 70vw, 440px); }
-}
-
-/* 若某张图加载失败会标注，方便排查 */
-.compare.compare--error::after{
-  content:'image missing';
-  position:absolute; top:8px; right:8px;
-  background:#000a; color:#fff; font-size:12px;
-  padding:4px 6px; border-radius:6px;
-}
-
-/* 让滑块一定在最上层并可接收事件 */
-.compare .slider{
-  pointer-events: auto;     /* 很关键：确保可拖拽 */
-  z-index: 20 !important;   /* 比标签更高，防止被挡 */
-  -webkit-appearance: none;
-  appearance: none;
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; /* 全面覆盖容器，便于拖拽 */
-  background: transparent;
-  cursor: ew-resize;
-  touch-action: none;        /* iOS/Android 防止手势冲突 */
-}
-/* 给滑块一个“可抓”的拇指（全高竖线） */
-.compare .slider::-webkit-slider-thumb{
-  -webkit-appearance: none;
-  appearance: none;
-  width: 2px; height: 100%;
-  background: #000;
-  border: none;
-  box-shadow: 0 0 0 9999px transparent;
-}
-
-/* 让对比容器可拖、禁选，避免手势冲突 */
-.compare{
-  cursor: ew-resize;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: none; /* 移动端防止系统手势抢事件 */
-}
-
-/* 保证滑块也能用（备用），但现在不依赖它 */
-.compare .slider{
-  pointer-events: auto;
-  z-index: 20 !important;
-  -webkit-appearance: none;
-  appearance: none;
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  background: transparent;
-  cursor: ew-resize;
-  touch-action: none;
-}
-.compare .slider::-webkit-slider-thumb{
-  -webkit-appearance: none; appearance: none;
-  width: 2px; height: 100%; background: #000; border: none;
-  box-shadow: 0 0 0 9999px transparent;
-}
