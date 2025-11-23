@@ -74,19 +74,20 @@ img{display:block;max-width:100%;height:auto}
 .compare{
   position:relative;width:100%;height:560px;border-radius:12px;overflow:hidden;background:#ddd;
   box-shadow:0 8px 30px rgba(0,0,0,.08);
-  touch-action:none; /* 允许直接在图片上拖 */
+  user-select:none; touch-action:none;
 }
 @media (max-width:768px){.compare{height:64vw;max-height:460px}}
 
-/* 基底：左=Midjourney */
+/* 左=Midjourney（底层） */
 .compare .img-left{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:1}
-/* 右侧遮罩容器（右=Wenxin） */
+/* 右=Wenxin（遮罩内） */
 .compare .reveal{position:absolute;inset:0;width:50%;overflow:hidden;z-index:2}
 .compare .reveal > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 
-/* 禁止图片被拖拽/选中，事件给滑块或pointer */
+/* 防止图片拽动影响交互 */
 .compare img{-webkit-user-drag:none;user-select:none;pointer-events:none}
 
+/* 滑块 */
 .compare .slider{-webkit-appearance:none;appearance:none;position:absolute;inset:0;width:100%;
   background:transparent;z-index:5;cursor:ew-resize;touch-action:none}
 .compare .slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:2px;height:100%;background:#000;border:none}
@@ -212,51 +213,46 @@ img{display:block;max-width:100%;height:auto}
     </div>
   </section>
 
-<section id="comparisons" class="section">
-  <h2>Comparisons</h2>
+  <!-- Comparisons -->
+  <section id="comparisons" class="section">
+    <h2>Comparisons</h2>
 
-  <!-- 1) Swordswoman  左=Midjourney 右=Wenxin -->
-  <article class="pair">
-    <h3>Apprentice Swordswoman</h3>
-    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-left" src="assets/mj_swordswoman.jpeg?v=101" alt="Midjourney · apprentice swordswoman">
-      <div class="reveal">
-        <img class="img img-right" src="assets/wx_swordswoman.png?v=101" alt="Wenxin Yige · apprentice swordswoman">
+    <!-- 1) Swordswoman  左=Midjourney 右=Wenxin -->
+    <article class="pair">
+      <h3>Apprentice Swordswoman</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"  src="assets/mj_swordswoman.jpeg?v=101"  alt="Midjourney · apprentice swordswoman">
+        <div class="reveal"><img class="img img-right" src="assets/wx_swordswoman.png?v=101" alt="Wenxin Yige · apprentice swordswoman"></div>
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label">Midjourney</span><span class="label">Wenxin Yige</span></div>
       </div>
-      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
-    </div>
-  </article>
+    </article>
 
-  <!-- 2) Archer  左=Midjourney 右=Wenxin（文件名兜底） -->
-  <article class="pair">
-    <h3>Apprentice Archer</h3>
-    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-left"
-           src="assets/mj-archer.jpeg?v=101"
-           onerror="this.onerror=null; this.src='assets/mj_archer.jpeg?v=101';"
-           alt="Midjourney · apprentice archer">
-      <div class="reveal">
-        <img class="img img-right" src="assets/wx_archer.png?v=101" alt="Wenxin Yige · apprentice archer">
+    <!-- 2) Archer  左=Midjourney 右=Wenxin（文件名兜底） -->
+    <article class="pair">
+      <h3>Apprentice Archer</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"
+             src="assets/mj-archer.jpeg?v=101"
+             onerror="this.onerror=null; this.src='assets/mj_archer.jpeg?v=101';"
+             alt="Midjourney · apprentice archer">
+        <div class="reveal"><img class="img img-right" src="assets/wx_archer.png?v=101" alt="Wenxin Yige · apprentice archer"></div>
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label">Midjourney</span><span class="label">Wenxin Yige</span></div>
       </div>
-      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
-    </div>
-  </article>
+    </article>
 
-  <!-- 3) Forest guardian  左=Midjourney 右=Wenxin -->
-  <article class="pair">
-    <h3>Young Forest Guardian</h3>
-    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <img class="img img-left" src="assets/mj_forest_guardian.jpeg?v=101" alt="Midjourney · young forest guardian">
-      <div class="reveal">
-        <img class="img img-right" src="assets/wx_forest_guardian.png?v=101" alt="Wenxin Yige · young forest guardian">
+    <!-- 3) Forest guardian  左=Midjourney 右=Wenxin -->
+    <article class="pair">
+      <h3>Young Forest Guardian</h3>
+      <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+        <img class="img img-left"  src="assets/mj_forest_guardian.jpeg?v=101"  alt="Midjourney · young forest guardian">
+        <div class="reveal"><img class="img img-right" src="assets/wx_forest_guardian.png?v=101" alt="Wenxin Yige · young forest guardian"></div>
+        <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
+        <div class="labels"><span class="label">Midjourney</span><span class="label">Wenxin Yige</span></div>
       </div>
-      <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
-    </div>
-  </article>
-</section>
+    </article>
+  </section>
 
   <!-- Analysis -->
   <section id="analysis" class="section section-alt">
@@ -302,44 +298,51 @@ img{display:block;max-width:100%;height:auto}
 </footer>
 
 <script>
-/* 对比：滑块可拖；也可直接在图片上左右拖动 */
+/* 比较组件：支持拖滑块 & 直接在图片上拖动 */
 (function(){
+  function clamp01(p){ return Math.max(0, Math.min(100, p)); }
   function setReveal(block, pct){
     const reveal = block.querySelector('.reveal');
-    if (reveal) reveal.style.width = Math.max(0, Math.min(100, pct)) + '%';
+    if(reveal){ reveal.style.width = clamp01(pct) + '%'; }
   }
   function bind(block){
     const slider = block.querySelector('.slider');
-    // 初始
+    // 初始 50%
     setReveal(block, slider ? slider.value : 50);
 
-    // A) 拖动滑块
-    if (slider){
+    // A) 拖滑块
+    if(slider){
       const sync = v => setReveal(block, v);
       slider.addEventListener('input',  e => sync(e.target.value));
       slider.addEventListener('change', e => sync(e.target.value));
     }
 
-    // B) 直接在图片区拖动（mouse/touch/pencil）
-    let dragging = false;
-    const onMove = (clientX)=>{
+    // B) 区域内任意处拖动
+    const onPos = (clientX)=>{
       const r = block.getBoundingClientRect();
       const pct = ((clientX - r.left) / r.width) * 100;
       setReveal(block, pct);
-      if (slider) slider.value = Math.max(0, Math.min(100, Math.round(pct)));
+      if(slider){ slider.value = String(clamp01(Math.round(pct))); }
     };
-    block.addEventListener('pointerdown', e => {
-      dragging = true; block.setPointerCapture(e.pointerId); onMove(e.clientX);
+    let dragging = false;
+    const start = e => { dragging = true; block.setPointerCapture?.(e.pointerId); onPos(e.clientX); };
+    const move  = e => { if(dragging) onPos(e.clientX); };
+    const end   = () => { dragging = false; };
+
+    // 既绑在 block，也绑在 slider（避免控件吞事件）
+    [block, slider].forEach(el=>{
+      if(!el) return;
+      el.addEventListener('pointerdown', start);
+      el.addEventListener('pointermove',  move);
+      el.addEventListener('pointerup',    end);
+      el.addEventListener('pointercancel',end);
     });
-    block.addEventListener('pointermove', e => { if (dragging) onMove(e.clientX); });
-    block.addEventListener('pointerup',   () => dragging = false);
-    block.addEventListener('pointercancel', ()=> dragging = false);
   }
   document.querySelectorAll('.compare').forEach(bind);
 })();
 
 /* 反馈：保存到 localStorage + 导出 */
-(function initFeedback(){
+(function(){
   const form = document.querySelector('.feedback');
   if(!form) return;
   const [ta] = form.querySelectorAll('textarea');
