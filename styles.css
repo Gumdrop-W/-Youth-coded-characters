@@ -160,7 +160,7 @@ html,body{ margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-sy
   .hero-split .byline{ top: 8px; left: 12px; }
 }
 
-/* Intro 单图样式（替代原 thumb-grid） */
+/* Intro 单图样式 */
 .intro-art img{
   width:100%;
   height:auto;
@@ -175,7 +175,7 @@ html,body{ margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-sy
   font-size:12px;
 }
 
-/* 让 Intro 两栏更稳（可选） */
+/* 让 Intro 两栏更稳 */
 .section-grid{
   grid-template-columns: minmax(0, 420px) 1fr; /* 左文案更窄，右图更大 */
 }
@@ -184,7 +184,7 @@ html,body{ margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-sy
   .intro-art figcaption{ text-align:left; }
 }
 
-/* Intro 单图展示（替代缩略图网格） */
+/* Intro 单图展示 */
 .intro-two-col{ grid-template-columns: minmax(0, 420px) 1fr; }
 @media (max-width: 960px){ .intro-two-col{ grid-template-columns: 1fr; } }
 
@@ -196,3 +196,29 @@ html,body{ margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-sy
   margin-top:8px; color:var(--muted); text-align:right; font-size:12px;
 }
 @media (max-width: 960px){ .intro-art figcaption{ text-align:left; } }
+
+/* Intro 两栏布局（左文案 + 右大图） */
+.intro-two-col{ grid-template-columns: minmax(0, 420px) 1fr; }
+@media (max-width: 960px){ .intro-two-col{ grid-template-columns:1fr; } }
+
+/* 固定比例容器 + 居中裁切 */
+.intro-art{
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  background: #eee;           
+}
+.intro-art img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;           
+  object-position: center;
+}
+
+.intro-art.ratio-3-2 { aspect-ratio: 3 / 2; }   
+.intro-art.ratio-16-9{ aspect-ratio: 16 / 9; }
+.intro-art.ratio-4-3 { aspect-ratio: 4 / 3; }
+
+.intro-art.contain img{ object-fit: contain; background:#f2f2f2; }
