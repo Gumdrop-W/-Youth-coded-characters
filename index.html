@@ -111,23 +111,30 @@
 
 <main id="top">
   <!-- Intro -->
-  <section id="intro" class="section">
-    <div class="section-grid">
-      <div>
-        <h2>Introduction</h2>
-        <ul class="bullets">
-          <li>Same semantic prompt across platforms; PG / non-sexualized defaults.</li>
-          <li>Observe: coverage, pose, style, palette, and cultural symbols.</li>
-          <li>Method: prompt parity + critical visual analysis + public presentation.</li>
-          <li>Reproducibility: record negatives, aspect ratio, seed, timestamp.</li>
-        </ul>
-      </div>
-     <figure class="intro-art">
-  <img src="assets/compare.jpg" alt="Midjourney vs Wenxin Yige comparison">
-  <figcaption class="tiny">Midjourney vs Wenxin Yige · aligned prompts (PG / non-sexualized)</figcaption>
-</figure>
+ <section id="intro" class="section">
+  <div class="section-grid intro-two-col">
+    <div>
+      <h2>Introduction</h2>
+      <ul class="bullets">
+        <li>Same semantic prompts across platforms; PG / non-sexualized defaults.</li>
+        <li>Observe: coverage, pose, style, palette, cultural symbols.</li>
+        <li>Method: prompt parity + critical visual analysis + public demo.</li>
+      </ul>
     </div>
-  </section>
+
+    <!-- 右侧单张大图：compare.jpg；如果不存在则自动退回脑图 -->
+    <figure class="intro-art">
+      <img
+        src="assets/compare.jpg"
+        alt="Midjourney vs Wenxin Yige comparison"
+        onerror="this.onerror=null;this.src='assets/brainstorm_game_prompts_en_4000x6000.png';"
+      />
+      <figcaption class="tiny">
+        Midjourney vs Wenxin Yige · aligned prompts (PG / non-sexualized)
+      </figcaption>
+    </figure>
+  </div>
+</section>
 
   <!-- Keywords -->
   <section id="keywords" class="section section-alt">
