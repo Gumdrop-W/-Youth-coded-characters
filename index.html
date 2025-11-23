@@ -113,17 +113,17 @@
   <article class="pair">
     <h3>Apprentice Swordswoman</h3>
     <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <!-- 左：Midjourney（底图） -->
+      <!-- 左：Midjourney（底图，外层） -->
       <img class="img img-left"
-           src="assets/mj_swordswoman.jpeg?v=18"
+           src="assets/mj_swordswoman.jpeg?v=21"
            alt="Midjourney · apprentice swordswoman"
-           onerror="this.onerror=null;this.src='assets/mj_swordswoman.jpg?v=18';">
-      <!-- 右：Wenxin（包在 .reveal 中） -->
+           onerror="this.onerror=null;this.src='assets/mj_swordswoman.jpg?v=21';">
+      <!-- 右：Wenxin（包在 .reveal 里面） -->
       <div class="reveal">
         <img class="img img-right"
-             src="assets/wx_swordswoman.png?v=18"
+             src="assets/wx_swordswoman.png?v=21"
              alt="Wenxin Yige · apprentice swordswoman"
-             onerror="this.onerror=null;this.src='assets/wx_swordswoman.jpg?v=18';">
+             onerror="this.onerror=null;this.src='assets/wx_swordswoman.jpg?v=21';">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
       <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
@@ -134,17 +134,15 @@
   <article class="pair">
     <h3>Apprentice Archer</h3>
     <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <!-- 左：Midjourney（底图） -->
       <img class="img img-left"
-           src="assets/mj-archer.jpeg?v=18"
+           src="assets/mj-archer.jpeg?v=21"
            alt="Midjourney · apprentice archer"
-           onerror="this.onerror=null;this.src='assets/mj_archer.jpeg?v=18';">
-      <!-- 右：Wenxin（包在 .reveal 中） -->
+           onerror="this.onerror=null;this.src='assets/mj_archer.jpeg?v=21';">
       <div class="reveal">
         <img class="img img-right"
-             src="assets/wx_archer.png?v=18"
+             src="assets/wx_archer.png?v=21"
              alt="Wenxin Yige · apprentice archer"
-             onerror="this.onerror=null;this.src='assets/wx_archer.jpg?v=18';">
+             onerror="this.onerror=null;this.src='assets/wx_archer.jpg?v=21';">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
       <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
@@ -155,23 +153,22 @@
   <article class="pair">
     <h3>Young Forest Guardian</h3>
     <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
-      <!-- 左：Midjourney（底图） -->
       <img class="img img-left"
-           src="assets/mj_forest_guardian.jpeg?v=18"
+           src="assets/mj_forest_guardian.jpeg?v=21"
            alt="Midjourney · young forest guardian"
-           onerror="this.onerror=null;this.src='assets/mj_forest_guardian.jpg?v=18';">
-      <!-- 右：Wenxin（包在 .reveal 中） -->
+           onerror="this.onerror=null;this.src='assets/mj_forest_guardian.jpg?v=21';">
       <div class="reveal">
         <img class="img img-right"
-             src="assets/wx_forest_guardian.png?v=18"
+             src="assets/wx_forest_guardian.png?v=21"
              alt="Wenxin Yige · young forest guardian"
-             onerror="this.onerror=null;this.src='assets/wx_forest_guardian.jpg?v=18';">
+             onerror="this.onerror=null;this.src='assets/wx_forest_guardian.jpg?v=21';">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
       <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
     </div>
   </article>
 </section>
+  
   <!-- Analysis -->
   <section id="analysis" class="section section-alt">
     <h2>Analysis</h2>
@@ -219,5 +216,65 @@
 </footer>
 
 <script src="script.js?v=16"></script>
+  <script>
+/* Robust compare init: 支持鼠标/触控，拖拽容器任意位置即可滑动 */
+(function(){
+  function wire(compare){
+    const left   = compare.querySelector('.img-left');
+    let   reveal = compare.querySelector('.reveal');
+    let   right  = reveal ? reveal.querySelector('.img-right') : null;
+
+    // 万一结构写错，这里自动纠正：把右图包进 .reveal
+    if (!reveal && right) {
+      reveal = document.createElement('div');
+      reveal.className = 'reveal';
+      right.parentNode.insertBefore(reveal, right);
+      reveal.appendChild(right);
+    }
+
+    const slider = compare.querySelector('.slider');
+    if (!reveal || !slider || !left) return;
+
+    const setPercent = (p) => {
+      p = Math.max(0, Math.min(100, p));
+      reveal.style.width = p + '%';
+      slider.value = p;
+    };
+
+    // range → 改宽度
+    slider.addEventListener('input', e => setPercent(+e.target.value));
+
+    // 支持直接拖容器
+    let dragging = false;
+    const rectOf = () => compare.getBoundingClientRect();
+    const posToPercent = (clientX) => {
+      const r = rectOf();
+      return ( (clientX - r.left) / r.width ) * 100;
+    };
+
+    const onPointerDown = (e) => {
+      dragging = true;
+      compare.setPointerCapture && compare.setPointerCapture(e.pointerId || 0);
+      setPercent(posToPercent(e.clientX));
+    };
+    const onPointerMove = (e) => { if (dragging) setPercent(posToPercent(e.clientX)); };
+    const onPointerUp   = () => { dragging = false; };
+
+    compare.addEventListener('pointerdown', onPointerDown);
+    compare.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+
+    // 初始 50%
+    setPercent(+slider.value || 50);
+  }
+
+  function init(){
+    document.querySelectorAll('.compare').forEach(wire);
+  }
+  // DOM 就绪 & 资源加载后都再跑一遍，避免竞态
+  document.addEventListener('DOMContentLoaded', init);
+  window.addEventListener('load', init);
+})();
+</script>
 </body>
 </html>
