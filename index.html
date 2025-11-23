@@ -71,17 +71,26 @@ img{display:block;max-width:100%;height:auto}
 
 /* Compare slider */
 .pair{max-width:1100px;margin:34px auto;padding:0 0 18px;border-bottom:1px dashed var(--line)}
-.compare{position:relative;width:100%;height:560px;border-radius:12px;overflow:hidden;background:#ddd;
-  box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.compare{
+  position:relative;width:100%;height:560px;border-radius:12px;overflow:hidden;background:#ddd;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+  touch-action:none; /* 允许直接在图片上拖 */
+}
 @media (max-width:768px){.compare{height:64vw;max-height:460px}}
+
 /* 基底：左=Midjourney */
 .compare .img-left{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:1}
 /* 右侧遮罩容器（右=Wenxin） */
 .compare .reveal{position:absolute;inset:0;width:50%;overflow:hidden;z-index:2}
 .compare .reveal > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+
+/* 禁止图片被拖拽/选中，事件给滑块或pointer */
+.compare img{-webkit-user-drag:none;user-select:none;pointer-events:none}
+
 .compare .slider{-webkit-appearance:none;appearance:none;position:absolute;inset:0;width:100%;
   background:transparent;z-index:5;cursor:ew-resize;touch-action:none}
 .compare .slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:2px;height:100%;background:#000;border:none}
+
 /* 标签 */
 .compare .labels{position:absolute;left:0;right:0;bottom:10px;z-index:6;display:flex;justify-content:space-between;
   padding:0 12px;font-size:12px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
@@ -150,7 +159,7 @@ img{display:block;max-width:100%;height:auto}
         </ul>
       </div>
       <figure class="intro-art">
-        <img src="assets/compare.jpg?v=100" alt="Midjourney vs Wenxin Yige">
+        <img src="assets/compare.jpg?v=101" alt="Midjourney vs Wenxin Yige">
         <figcaption class="tiny">Midjourney vs Wenxin Yige · aligned prompts (PG / non-sexualized)</figcaption>
       </figure>
     </div>
@@ -164,7 +173,7 @@ img{display:block;max-width:100%;height:auto}
         <p>Midjourney is a text-to-image platform based on diffusion models (Discord bot workflow). Defaults lean toward semi-/photoreal fantasy with strong lighting and detail. Under ‘youth-coded’ prompts, heroic poses and fashion-oriented elements easily appear—PG constraints and negative prompts are used to avoid sexualisation.</p>
       </div>
       <figure class="platform-art">
-        <img src="assets/mj-compare.jpg?v=100" alt="Midjourney comparison grid">
+        <img src="assets/mj-compare.jpg?v=101" alt="Midjourney comparison grid">
         <figcaption class="tiny">Sample outputs (aligned prompts)</figcaption>
       </figure>
     </div>
@@ -178,7 +187,7 @@ img{display:block;max-width:100%;height:auto}
         <p>Wenxin Yige (Baidu) supports Chinese prompts and multiple style templates. Defaults lean toward illustration/anime, softer palettes, and stylised elements, often invoking ‘traditional Chinese aesthetics’ or ‘cute-ification’. PG constraints and negatives are applied to avoid nudity or suggestive poses.</p>
       </div>
       <figure class="platform-art">
-        <img src="assets/wx-compare.jpg?v=100" alt="Wenxinyige comparison grid">
+        <img src="assets/wx-compare.jpg?v=101" alt="Wenxinyige comparison grid">
         <figcaption class="tiny">Sample outputs (aligned prompts)</figcaption>
       </figure>
     </div>
@@ -188,7 +197,7 @@ img{display:block;max-width:100%;height:auto}
   <section id="keywords" class="section keywords">
     <div class="kw-grid">
       <figure class="kw-art">
-        <img src="assets/brainstorm_game_prompts_en_4000x6000.png?v=100" alt="Keyword mind map">
+        <img src="assets/brainstorm_game_prompts_en_4000x6000.png?v=101" alt="Keyword mind map">
       </figure>
       <div class="kw-copy">
         <h2 class="kw-title">Keyword</h2>
@@ -198,7 +207,7 @@ img{display:block;max-width:100%;height:auto}
           <li><strong>Reproducible params:</strong> record platform, style tags, AR, and (if possible) random seed.</li>
           <li><strong>Publicly auditable:</strong> standardised naming; low-resolution examples for academic use only.</li>
         </ul>
-        <a class="btn btn-outline" href="assets/brainstorm_game_prompts_en_4000x6000.png?v=100" target="_blank" rel="noopener">View Image</a>
+        <a class="btn btn-outline" href="assets/brainstorm_game_prompts_en_4000x6000.png?v=101" target="_blank" rel="noopener">View Image</a>
       </div>
     </div>
   </section>
@@ -209,44 +218,42 @@ img{display:block;max-width:100%;height:auto}
   <!-- 1) Swordswoman  左=Midjourney 右=Wenxin -->
   <article class="pair">
     <h3>Apprentice Swordswoman</h3>
-    <div class="compare">
-      <!-- 左图（底层） -->
-      <img class="img img-left" src="assets/mj_swordswoman.jpeg" alt="Midjourney · apprentice swordswoman">
-      <!-- 右图（遮罩内） -->
+    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+      <img class="img img-left" src="assets/mj_swordswoman.jpeg?v=101" alt="Midjourney · apprentice swordswoman">
       <div class="reveal">
-        <img class="img img-right" src="assets/wx_swordswoman.png" alt="Wenxin Yige · apprentice swordswoman">
+        <img class="img img-right" src="assets/wx_swordswoman.png?v=101" alt="Wenxin Yige · apprentice swordswoman">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label">Midjourney</span><span class="label">Wenxin Yige</span></div>
+      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
     </div>
   </article>
 
   <!-- 2) Archer  左=Midjourney 右=Wenxin（文件名兜底） -->
   <article class="pair">
     <h3>Apprentice Archer</h3>
-    <div class="compare">
+    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
       <img class="img img-left"
-           src="assets/mj-archer.jpeg"
-           onerror="this.onerror=null; this.src='assets/mj_archer.jpeg';"
+           src="assets/mj-archer.jpeg?v=101"
+           onerror="this.onerror=null; this.src='assets/mj_archer.jpeg?v=101';"
            alt="Midjourney · apprentice archer">
       <div class="reveal">
-        <img class="img img-right" src="assets/wx_archer.png" alt="Wenxin Yige · apprentice archer">
+        <img class="img img-right" src="assets/wx_archer.png?v=101" alt="Wenxin Yige · apprentice archer">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label">Midjourney</span><span class="label">Wenxin Yige</span></div>
+      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
     </div>
   </article>
 
   <!-- 3) Forest guardian  左=Midjourney 右=Wenxin -->
   <article class="pair">
     <h3>Young Forest Guardian</h3>
-    <div class="compare">
-      <img class="img img-left" src="assets/mj_forest_guardian.jpeg" alt="Midjourney · young forest guardian">
+    <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+      <img class="img img-left" src="assets/mj_forest_guardian.jpeg?v=101" alt="Midjourney · young forest guardian">
       <div class="reveal">
-        <img class="img img-right" src="assets/wx_forest_guardian.png" alt="Wenxin Yige · young forest guardian">
+        <img class="img img-right" src="assets/wx_forest_guardian.png?v=101" alt="Wenxin Yige · young forest guardian">
       </div>
       <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
-      <div class="labels"><span class="label">Midjourney</span><span class="label">Wenxin Yige</span></div>
+      <div class="labels"><span class="label left">Midjourney</span><span class="label right">Wenxin Yige</span></div>
     </div>
   </article>
 </section>
@@ -295,26 +302,49 @@ img{display:block;max-width:100%;height:auto}
 </footer>
 
 <script>
-/* 初始化对比滑块（设置右侧遮罩宽度） */
-function initComparisons(){
-  document.querySelectorAll('.compare').forEach(block=>{
-    const slider = block.querySelector('.slider');
+/* 对比：滑块可拖；也可直接在图片上左右拖动 */
+(function(){
+  function setReveal(block, pct){
     const reveal = block.querySelector('.reveal');
-    const set = v => reveal && (reveal.style.width = (Math.max(0,Math.min(100, v))) + '%');
-    if(slider){ set(slider.value||50);
-      slider.addEventListener('input',e=>set(e.target.value));
-      slider.addEventListener('change',e=>set(e.target.value));
+    if (reveal) reveal.style.width = Math.max(0, Math.min(100, pct)) + '%';
+  }
+  function bind(block){
+    const slider = block.querySelector('.slider');
+    // 初始
+    setReveal(block, slider ? slider.value : 50);
+
+    // A) 拖动滑块
+    if (slider){
+      const sync = v => setReveal(block, v);
+      slider.addEventListener('input',  e => sync(e.target.value));
+      slider.addEventListener('change', e => sync(e.target.value));
     }
-  });
-}
+
+    // B) 直接在图片区拖动（mouse/touch/pencil）
+    let dragging = false;
+    const onMove = (clientX)=>{
+      const r = block.getBoundingClientRect();
+      const pct = ((clientX - r.left) / r.width) * 100;
+      setReveal(block, pct);
+      if (slider) slider.value = Math.max(0, Math.min(100, Math.round(pct)));
+    };
+    block.addEventListener('pointerdown', e => {
+      dragging = true; block.setPointerCapture(e.pointerId); onMove(e.clientX);
+    });
+    block.addEventListener('pointermove', e => { if (dragging) onMove(e.clientX); });
+    block.addEventListener('pointerup',   () => dragging = false);
+    block.addEventListener('pointercancel', ()=> dragging = false);
+  }
+  document.querySelectorAll('.compare').forEach(bind);
+})();
+
 /* 反馈：保存到 localStorage + 导出 */
-function initFeedback(){
+(function initFeedback(){
   const form = document.querySelector('.feedback');
   if(!form) return;
   const [ta] = form.querySelectorAll('textarea');
   const [nameI,emailI] = form.querySelectorAll('input');
   const key='yc_feedback_v1';
-  // 载入
   try{
     const saved = JSON.parse(localStorage.getItem(key)||'[]');
     form.addEventListener('submit', ()=>{
@@ -328,8 +358,7 @@ function initFeedback(){
       document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
     });
   }catch(e){}
-}
-document.addEventListener('DOMContentLoaded', ()=>{ initComparisons(); initFeedback(); });
+})();
 </script>
 </body>
 </html>
