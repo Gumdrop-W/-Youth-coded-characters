@@ -309,3 +309,54 @@ img{ max-width:100%; height:auto; display:block; }
   content:'image missing'; position:absolute; top:8px; right:8px; z-index:7;
   background:#000a; color:#fff; font-size:12px; padding:4px 6px; border-radius:6px;
 }
+
+/* ——对比容器：尺寸固定，铺满裁切（无白边），可拖动—— */
+.pair{ max-width:1100px; margin:34px auto; padding:0 0 18px; border-bottom:1px dashed var(--line); }
+
+.compare{
+  position:relative;
+  width:100%;
+  height:clamp(360px, 58vw, 560px); /* 跟你截图的比例感一致 */
+  border-radius:12px;
+  overflow:hidden;
+  background:#ddd;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+  touch-action:none;
+}
+
+.compare .img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;        /* 铺满容器不留白边 */
+  object-position:center;
+  user-select:none; -webkit-user-select:none; -webkit-user-drag:none;
+  pointer-events:none;
+}
+
+.compare .reveal{
+  position:absolute; inset:0;
+  width:50%;               /* 初始 50% */
+  overflow:hidden; z-index:2;
+}
+
+.compare .img-left{ z-index:1; }
+
+.compare .slider{
+  position:absolute; inset:0; width:100%; height:100%;
+  appearance:none; -webkit-appearance:none;
+  background:transparent; z-index:5; cursor:ew-resize;
+}
+.compare .slider::-webkit-slider-thumb{
+  appearance:none; -webkit-appearance:none;
+  width:0; height:100%; /* 隐形拇指：整块可拖 */
+}
+
+/* 底部左右标签 */
+.compare .labels{
+  position:absolute; left:0; right:0; bottom:10px; z-index:6;
+  display:flex; justify-content:space-between; padding:0 10px;
+}
+.compare .label{
+  font-size:12px; color:#fff; background:rgba(0,0,0,.36);
+  padding:4px 8px; border-radius:6px; text-shadow:0 1px 2px rgba(0,0,0,.5);
+}
