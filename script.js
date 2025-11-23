@@ -63,3 +63,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+(function () {
+  function initComparisons() {
+    document.querySelectorAll('.compare').forEach(block => {
+      const slider = block.querySelector('.slider');
+
+      // 如果右图还没被包进 .reveal（手动写了就会跳过）
+      const rightImg = block.querySelector('.img-right');
+      if (rightImg && !rightImg.parentElement.classList.contains('reveal')) {
+        const wrap = document.createElement('div');
+        wrap.className = 'reveal';
+        rightImg.parentNode.insertBefore(wrap, rightImg);
+        wrap.appendChild(rightImg);
+      }
+
+      const reveal = block.querySelector('.reveal');
+      const setWidth = (v) => reveal && (reveal.style.width = Math.max(0, Math.min(100, v)) + '%');
+
+      if (slider && reveal) {
+        setWidth(slider.value || 50);
+        slider.addEventListener('input', e => setWidth(e.target.value));
+        slider.addEventListener('change', e => setWidth(e.target.value));
+        // 兼容移动端
+        slider.addEventListener('touchstart', e => e.stopPropagation(), {passive:true});
+      }
+
+      // 调试：如有图片没加载，会打标（可删）
+      block.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', () => block.classList.add('compare--error'));
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initComparisons);
+  window.addEventListener('load', initComparisons);
+})();
