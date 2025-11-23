@@ -99,3 +99,80 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('DOMContentLoaded', initComparisons);
   window.addEventListener('load', initComparisons);
 })();
+
+(function(){
+  function tryLoad(img, srcList){
+    return new Promise(resolve=>{
+      const list = Array.isArray(srcList) ? srcList : String(srcList).split(',');
+      let idx = 0;
+      function next(){
+        if(idx >= list.length){ img.dataset.fail = '1'; resolve(false); return; }
+        const url = list[idx++].trim();
+        img.onload = ()=>resolve(true);
+        img.onerror = next;
+        img.src = url + (url.includes('?') ? '' : `?v=${Date.now()}`); // 破缓存
+      }
+      next();
+    });
+  }
+
+  function initOne(block){
+    // 清空旧内容（防止之前结构残留）
+    block.innerHTML = '';
+
+    // 读取 data-*
+    const leftSrcs  = block.dataset.left  || '';
+    const rightSrcs = block.dataset.right || '';
+    const leftLab   = block.dataset.leftLabel  || 'Left';
+    const rightLab  = block.dataset.rightLabel || 'Right';
+
+    // 创建 DOM
+    const base = document.createElement('img');   base.className = 'base';
+    const reveal = document.createElement('div'); reveal.className = 'reveal';
+    const topImg = document.createElement('img'); topImg.className = 'top';
+    reveal.appendChild(topImg);
+
+    const slider = document.createElement('input');
+    slider.type = 'range'; slider.min = 0; slider.max = 100; slider.value = 50;
+    slider.className = 'slider';
+
+    const labels = document.createElement('div'); labels.className = 'labels';
+    labels.innerHTML = `<span class="label left">${leftLab}</span><span class="label right">${rightLab}</span>`;
+
+    block.append(base, reveal, slider, labels);
+
+    // 按顺序加载：左=Midjourney，右=Wenxin
+    Promise.all([ tryLoad(base, leftSrcs), tryLoad(topImg, rightSrcs) ]).then(([okL, okR])=>{
+      if(!okL || !okR) block.classList.add('compare--error');
+    });
+
+    // 初始 50%
+    setReveal(slider.value);
+
+    // 支持整块拖动（鼠标/触摸）
+    function setReveal(v){
+      reveal.style.width = Math.max(0, Math.min(100, +v)) + '%';
+    }
+    function pctFromEvent(e){
+      const r = block.getBoundingClientRect();
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      return (x / r.width) * 100;
+    }
+    const onDrag = (e)=>{ setReveal(pctFromEvent(e)); };
+    slider.addEventListener('input', e=> setReveal(e.target.value));
+    block.addEventListener('pointerdown', e=>{
+      block.setPointerCapture(e.pointerId);
+      setReveal(pctFromEvent(e));
+    });
+    block.addEventListener('pointermove', e=>{
+      if(e.buttons) setReveal(pctFromEvent(e));
+    });
+    // 兼容触摸
+    block.addEventListener('touchstart', onDrag, {passive:true});
+    block.addEventListener('touchmove',  onDrag, {passive:true});
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    document.querySelectorAll('.compare').forEach(initOne);
+  });
+})();
