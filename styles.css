@@ -269,3 +269,25 @@ img{ max-width:100%; height:auto; display:block; }
   background:#000a; color:#fff; font-size:12px;
   padding:4px 6px; border-radius:6px;
 }
+
+/* 让滑块一定在最上层并可接收事件 */
+.compare .slider{
+  pointer-events: auto;     /* 很关键：确保可拖拽 */
+  z-index: 20 !important;   /* 比标签更高，防止被挡 */
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; /* 全面覆盖容器，便于拖拽 */
+  background: transparent;
+  cursor: ew-resize;
+  touch-action: none;        /* iOS/Android 防止手势冲突 */
+}
+/* 给滑块一个“可抓”的拇指（全高竖线） */
+.compare .slider::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 2px; height: 100%;
+  background: #000;
+  border: none;
+  box-shadow: 0 0 0 9999px transparent;
+}
