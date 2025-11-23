@@ -11,10 +11,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 
-  <!-- Main CSS (记得 push 最新 v=12 的 styles.css) -->
-  <link rel="stylesheet" href="styles.css?v=12">
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="styles.css?v=13">
 </head>
 <body>
+
 <header class="site-header">
   <nav class="topnav">
     <a class="brand" href="#top">Code and Culture</a>
@@ -55,7 +56,7 @@
           <li>Reproducibility: record negatives, aspect ratio, seed, timestamp.</li>
         </ul>
       </div>
-      <figure class="intro-art">
+      <figure class="intro-art ratio-3-2">
         <img src="assets/compare.jpg" alt="Midjourney vs Wenxin Yige comparison"
              onerror="this.onerror=null;this.src='assets/brainstorm_game_prompts_en_4000x6000.png';">
         <figcaption class="tiny">Midjourney vs Wenxin Yige · aligned prompts (PG / non-sexualized)</figcaption>
@@ -90,9 +91,9 @@
         <h2>Wenxinyige</h2>
         <p>
           Wenxin Yige is a text-to-image generation platform developed by Baidu, supporting Chinese prompts and multiple stylistic templates.
-          Its default aesthetic leans towards cartoon/illustrative styles, soft colour palettes, and stylised elements,
-          often featuring ‘traditional Chinese aesthetics’ and ‘cute-ification’. For ‘youthful’ characters, incorporate PG-rated content
-          and negative constraints (e.g., avoiding nudity or suggestive poses) to manage output boundaries.
+          Its default aesthetic leans towards cartoon/illustrative styles, soft colour palettes, and stylised elements, often featuring
+          ‘traditional Chinese aesthetics’ and ‘cute-ification’. For ‘youthful’ characters, incorporate PG-rated content and negative constraints
+          (e.g., avoiding nudity or suggestive poses) to manage output boundaries.
         </p>
       </div>
       <figure class="platform-art ratio-4-3">
@@ -112,10 +113,10 @@
       <div class="kw-copy">
         <h2 class="kw-title">Keyword</h2>
         <ul class="kw-bullets">
-          <li><strong>Cross-language alignment:</strong> Each theme provides bilingual Chinese–English versions, with semantic consistency verified through back-translation (e.g., age reference, posture, attire, colour palette).</li>
-          <li><strong>PG rating & negative constraints:</strong> Uniformly uses PG-rated, non-sexualised restrictions; excludes terms like nudity/suggestive poses/deep V-necks/fetishisation.</li>
-          <li><strong>Reproducible parameters:</strong> Records platform, style tags, aspect ratio, and (where possible) random seed to ensure repeatable generation.</li>
-          <li><strong>Publicly auditable:</strong> All prompts/metadata follow standard naming; examples are shown at low resolution and restricted to academic use.</li>
+          <li><strong>Cross-language alignment:</strong> bilingual prompts with back-translation checks (age, posture, attire, palette).</li>
+          <li><strong>PG & negatives:</strong> non-sexualized generation; exclude nudity/suggestive poses/deep V-necks/fetishisation.</li>
+          <li><strong>Reproducible params:</strong> record platform, style tags, AR, and (if possible) random seed.</li>
+          <li><strong>Publicly auditable:</strong> standardised naming; low-resolution examples for academic use only.</li>
         </ul>
         <a class="btn btn-outline" href="assets/brainstorm_game_prompts_en_4000x6000.png" target="_blank" rel="noopener">View Image</a>
       </div>
@@ -144,7 +145,7 @@
     </article>
 
     <!-- 2) Archer -->
-    <article class="pair" id="pair-archer">
+    <article class="pair">
       <h3>Apprentice Archer</h3>
       <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
         <img class="img img-left"
@@ -182,13 +183,8 @@
   <section id="analysis" class="section section-alt">
     <h2>Analysis</h2>
     <div class="two-col">
-      <p><strong>Patterns:</strong> Under the same “youth-coded + PG” semantics, platform defaults
-        (style layer, pose templates, color strategy) still shape output. EN-context tools tend to
-        realism/semi-realism and functional gear; CN-context tools often adopt anime/illustration,
-        higher saturation, and icon-like poses.</p>
-      <p><strong>Implications:</strong> For child/adolescent contexts, set conservative defaults
-        (modest clothing, neutral stance) and document negative prompts. Maintain cross-language
-        prompt parity and record parameters (AR/seed/time) for reproducibility.</p>
+      <p><strong>Patterns:</strong> Under the same “youth-coded + PG” semantics, platform defaults (style, pose templates, colour strategy) still shape output. EN-context tools tend to realism/semi-realism and functional gear; CN-context tools often adopt anime/illustration, higher saturation, and icon-like poses.</p>
+      <p><strong>Implications:</strong> For child/adolescent contexts, set conservative defaults (modest clothing, neutral stance) and document negative prompts. Maintain cross-language prompt parity and record parameters (AR/seed/time) for reproducibility.</p>
     </div>
   </section>
 
@@ -203,17 +199,15 @@
       <div class="row">
         <label class="half">
           Name (optional)
-          <input type="text" placeholder="Your name"/>
+          <input type="text" placeholder="Your name" />
         </label>
         <label class="half">
           Email (optional)
-          <input type="email" placeholder="name@example.com"/>
+          <input type="email" placeholder="name@example.com" />
         </label>
       </div>
       <button class="btn" type="submit">Save locally</button>
-      <p class="tiny">
-        This demo stores feedback locally in your browser (no server). Use the button in the footer to export JSON.
-      </p>
+      <p class="tiny">This demo stores feedback locally in your browser (no server). Use “Export feedback JSON” below to download.</p>
     </form>
   </section>
 </main>
@@ -231,19 +225,7 @@
   </div>
 </footer>
 
-<!-- 单一脚本：驱动滑块 & 打印加载失败的图片 -->
-<script>
-  // 驱动所有对比块（默认右图显示 50%—100%）
-  document.querySelectorAll('.compare').forEach(b=>{
-    const s=b.querySelector('.slider'), r=b.querySelector('.img-right');
-    const set=v=>r&&(r.style.clipPath=`polygon(${v}% 0,100% 0,100% 100%,${v}% 100%)`);
-    if(s&&r){ set(s.value||50); s.addEventListener('input',e=>set(e.target.value)); }
-  });
-
-  // 记录任何图片加载失败，方便定位文件名/后缀问题
-  document.querySelectorAll('img').forEach(img=>{
-    img.addEventListener('error', ()=>console.error('[IMG FAIL]', img.currentSrc || img.src));
-  });
-</script>
+<!-- JS -->
+<script src="script.js?v=13"></script>
 </body>
 </html>
