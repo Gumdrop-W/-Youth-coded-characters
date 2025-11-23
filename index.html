@@ -224,17 +224,26 @@
  <article class="pair" id="pair-archer">
   <h3>Apprentice Archer</h3>
   <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
+    <!-- 左图：先用 .jpeg，失败自动试 .jpg，再失败试 .png -->
     <img class="img img-left"
-         src="assets/mj_archer.jpeg?v=2"
-         alt="Midjourney · apprentice archer">
+         src="assets/mj_archer.jpeg?v=3"
+         alt="Midjourney · apprentice archer"
+         onerror="
+           console.error('Fail:', this.src);
+           if (this.src.includes('.jpeg')) { this.src='assets/mj_archer.jpg?v=3'; }
+           else if (this.src.includes('.jpg')) { this.src='assets/mj_archer.png?v=3'; }
+           else { this.style.display='none'; }
+         ">
 
+    <!-- 右图：.png → .jpg → .jpeg -->
     <img class="img img-right"
-         src="assets/wx_archer.png?v=2"
+         src="assets/wx_archer.png?v=3"
          alt="Wenxin Yige · apprentice archer"
          onerror="
-           if (this.src.includes('.png')) { this.src='assets/wx_archer.jpg?v=2'; }
-           else if (this.src.includes('.jpg')) { this.src='assets/wx_archer.jpeg?v=2'; }
-           else { this.src='assets/mj_archer.jpeg?v=2'; this.style.filter='grayscale(1)'; }
+           console.error('Fail:', this.src);
+           if (this.src.includes('.png')) { this.src='assets/wx_archer.jpg?v=3'; }
+           else if (this.src.includes('.jpg')) { this.src='assets/wx_archer.jpeg?v=3'; }
+           else { this.style.display='none'; }
          ">
 
     <input class="slider" type="range" min="0" max="100" value="50" aria-label="comparison slider">
@@ -312,16 +321,23 @@ document.querySelectorAll('.compare img').forEach(img=>{
   img.addEventListener('error', ()=>console.error('Image failed to load:', img.getAttribute('src')));
 });
 </script>
-  <script>
+  
+<script>
+  // 初始化所有对比块 & 打印加载失败的图片路径
   document.querySelectorAll('.compare').forEach(block => {
     const slider = block.querySelector('.slider');
     const right  = block.querySelector('.img-right');
-    const setClip = v => right && (right.style.clipPath = `polygon(${v}% 0, 100% 0, 100% 100%, ${v}% 100%)`);
-    if (slider && right){
+    const setClip = v => right && (right.style.clipPath =
+      `polygon(${v}% 0, 100% 0, 100% 100%, ${v}% 100%)`);
+    if (slider && right) {
       setClip(slider.value || 50);
       slider.addEventListener('input', e => setClip(e.target.value));
       slider.addEventListener('change', e => setClip(e.target.value));
     }
+  });
+  // 任何 <img> 失败都报到控制台，便于定位
+  document.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('error', ()=>console.error('[IMG FAIL]', img.getAttribute('src')));
   });
 </script>
 </body>
