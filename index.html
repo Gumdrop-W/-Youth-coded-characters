@@ -78,30 +78,23 @@ img{display:block;max-width:100%;height:auto}
 }
 @media (max-width:768px){.compare{height:64vw;max-height:460px}}
 
-/* 左=Midjourney（底层） */
 .compare .img-left{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:1}
-/* 右=Wenxin（遮罩内） */
 .compare .reveal{position:absolute;inset:0;width:50%;overflow:hidden;z-index:2}
 .compare .reveal > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 
-/* 防止图片拽动影响交互 */
 .compare img{-webkit-user-drag:none;user-select:none;pointer-events:none}
 
-/* 滑块 */
 .compare .slider{-webkit-appearance:none;appearance:none;position:absolute;inset:0;width:100%;
   background:transparent;z-index:5;cursor:ew-resize;touch-action:none}
 .compare .slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:2px;height:100%;background:#000;border:none}
 
-/* 标签 */
 .compare .labels{position:absolute;left:0;right:0;bottom:10px;z-index:6;display:flex;justify-content:space-between;
   padding:0 12px;font-size:12px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
 .compare .label{background:rgba(0,0,0,.36);padding:4px 8px;border-radius:6px}
 
-/* Two-column text */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:0 auto 18px}
 @media (max-width:960px){.two-col{grid-template-columns:1fr}}
 
-/* Buttons & footer */
 .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--btn);color:var(--btn-ink);
   text-decoration:none;border:1px solid #000;font-weight:600;box-shadow:0 2px 0 #000}
 .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink);box-shadow:none}
@@ -110,7 +103,6 @@ img{display:block;max-width:100%;height:auto}
 .site-footer{border-top:1px solid var(--line);padding:32px 20px}
 .footer-grid{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
 
-/* Feedback */
 .feedback{max-width:900px;margin:0 auto;display:block}
 .feedback label{display:block;font-size:14px;margin-bottom:10px}
 .feedback textarea,.feedback input{width:100%;font:inherit;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}
@@ -228,7 +220,7 @@ img{display:block;max-width:100%;height:auto}
       </div>
     </article>
 
-    <!-- 2) Archer  左=Midjourney 右=Wenxin（文件名兜底） -->
+    <!-- 2) Archer  左=Midjourney 右=Wenxin -->
     <article class="pair">
       <h3>Apprentice Archer</h3>
       <div class="compare" data-left="Midjourney" data-right="Wenxin Yige">
